@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:wide/core/screens/all.dart';
 
 class NumberTextField extends StatelessWidget {
-  final TextEditingController? controller;
-  const NumberTextField({super.key, this.controller});
+  final TextEditingController controller = TextEditingController(text: "+998");
+  NumberTextField({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,27 +11,17 @@ class NumberTextField extends StatelessWidget {
       width: 83,
       height: 56,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: const Color(0xFFCFCFD0),
-          width: 1,
-        ),
-      ),
-      child: TextField(
-        controller: controller,
-        inputFormatters: [
-          LengthLimitingTextInputFormatter(3),
-          FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-        ],
-        keyboardType: TextInputType.number,
-        decoration: const InputDecoration(
-          border: InputBorder.none,
-          hintText: "+998",
-          hintStyle: TextStyle(
-            color: Color(0xFFB7B7B7),
-            fontSize: 16,
-          ),
-          contentPadding: EdgeInsets.symmetric(horizontal: 16),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(width: 1, color: AppColors.cfcfdf0)),
+      child: const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 13, vertical: 16),
+        child: Text(
+          "+998",
+          style: TextStyle(
+              color: AppColors.c1c1c1c,
+              fontSize: 16,
+              fontWeight: FontWeight.w400),
         ),
       ),
     );

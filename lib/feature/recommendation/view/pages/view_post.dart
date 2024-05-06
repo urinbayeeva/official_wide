@@ -2,7 +2,8 @@ import 'package:expandable_text/expandable_text.dart';
 import 'package:wide/core/screens/all.dart';
 
 class ViewPost extends StatefulWidget {
-  const ViewPost({super.key});
+  const ViewPost({super.key, required this.imagePath});
+  final String imagePath;
 
   @override
   State<ViewPost> createState() => _ViewPostState();
@@ -102,16 +103,23 @@ class _ViewPostState extends State<ViewPost> {
                 children: [
                   GestureDetector(
                       onTap: () => Navigator.pop(context),
-                      child: SvgPicture.asset(AppImages.returnIcon, width: 24, height: 24)),
+                      child: SvgPicture.asset(AppImages.returnIcon,
+                          width: 24, height: 24)),
                   Column(
                     children: [
                       GestureDetector(
                           onTap: scrollToPreviousImage,
-                          child: SvgPicture.asset("assets/icons/home/up_icon.svg", width: 38, height: 38)),
+                          child: SvgPicture.asset(
+                              "assets/icons/home/up_icon.svg",
+                              width: 38,
+                              height: 38)),
                       const SizedBox(height: 40),
                       GestureDetector(
                           onTap: scrollToNextImage,
-                          child: SvgPicture.asset("assets/icons/home/down_icon.svg", width: 38, height: 38)),
+                          child: SvgPicture.asset(
+                              "assets/icons/home/down_icon.svg",
+                              width: 38,
+                              height: 38)),
                     ],
                   )
                 ],
@@ -123,7 +131,7 @@ class _ViewPostState extends State<ViewPost> {
               child: ListView.builder(
                 controller: scrollController,
                 scrollDirection: Axis.vertical,
-                itemCount: wideImage.length,
+                itemCount: widget.imagePath.length,
                 itemBuilder: (context, index) {
                   return Column(
                     children: [
@@ -135,7 +143,7 @@ class _ViewPostState extends State<ViewPost> {
                             child: AspectRatio(
                               aspectRatio: 16 / 10,
                               child: Image.asset(
-                                wideImage[index],
+                                widget.imagePath,
                                 fit: BoxFit.fill,
                               ),
                             ),
@@ -147,7 +155,8 @@ class _ViewPostState extends State<ViewPost> {
                               onPressed: () {
                                 moreBottomSheet(context);
                               },
-                              icon: SvgPicture.asset("assets/icons/post/more_icon.svg"),
+                              icon: SvgPicture.asset(
+                                  "assets/icons/post/more_icon.svg"),
                             ),
                           ),
                           Positioned(
@@ -161,27 +170,36 @@ class _ViewPostState extends State<ViewPost> {
                                   bottomLeft: Radius.circular(8),
                                   bottomRight: Radius.circular(8),
                                 ),
-                                boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.5), blurRadius: 100)],
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.black.withOpacity(0.5),
+                                      blurRadius: 100)
+                                ],
                               ),
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 16),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 16),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Row(
                                           children: [
                                             CircleAvatar(
                                               radius: 18,
-                                              backgroundImage: AssetImage(personImages[index]),
+                                              backgroundImage: AssetImage(
+                                                  personImages[index]),
                                             ),
                                             const SizedBox(width: 8),
                                             Text(
                                               userName[index],
                                               style: const TextStyle(
-                                                  fontSize: 14, fontWeight: FontWeight.bold, color: Colors.white),
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white),
                                             ),
                                             const SizedBox(width: 34),
                                             SvgPicture.asset(
@@ -193,14 +211,20 @@ class _ViewPostState extends State<ViewPost> {
                                             const SizedBox(width: 4),
                                             const Text(
                                               "400     1 soat oldin",
-                                              style: TextStyle(fontSize: 12, color: Colors.white),
+                                              style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: Colors.white),
                                             ),
                                           ],
                                         ),
                                         Container(
                                           decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(8),
-                                            border: Border.all(color: Colors.white.withOpacity(0.5), width: 0.5),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            border: Border.all(
+                                                color: Colors.white
+                                                    .withOpacity(0.5),
+                                                width: 0.5),
                                           ),
                                           child: InkWell(
                                             onTap: () {
@@ -212,10 +236,16 @@ class _ViewPostState extends State<ViewPost> {
                                               height: 24,
                                               alignment: Alignment.center,
                                               child: Padding(
-                                                padding: const EdgeInsets.symmetric(horizontal: 8),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 8),
                                                 child: Text(
-                                                  isFollowed ? 'Following' : 'Follow',
-                                                  style: const TextStyle(color: Colors.white, fontSize: 14),
+                                                  isFollowed
+                                                      ? 'Following'
+                                                      : 'Follow',
+                                                  style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 14),
                                                 ),
                                               ),
                                             ),
@@ -237,7 +267,9 @@ class _ViewPostState extends State<ViewPost> {
                                         collapseOnTextTap: true,
                                         linkColor: Colors.white,
                                         style: const TextStyle(
-                                            color: Colors.white, fontSize: 14, fontWeight: FontWeight.w400),
+                                            color: Colors.white,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400),
                                       ),
                                     ),
                                   ],
@@ -259,7 +291,9 @@ class _ViewPostState extends State<ViewPost> {
               children: [
                 const Spacer(),
                 RotatedWidget(
-                  imagePath: isLiked ? "assets/icons/tab_bar/like.svg" : "assets/icons/home/like_black.svg",
+                  imagePath: isLiked
+                      ? "assets/icons/tab_bar/like.svg"
+                      : "assets/icons/home/like_black.svg",
                   widht: 24,
                   height: 24,
                   text: "123..k",
@@ -280,7 +314,10 @@ class _ViewPostState extends State<ViewPost> {
                     height: 24,
                     text: "10",
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const CommentPage()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const CommentPage()));
                     }),
                 RotatedWidget(
                   imagePath: "assets/icons/tab_bar/send.svg",

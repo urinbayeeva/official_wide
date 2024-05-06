@@ -42,7 +42,10 @@ class _InputPasswordState extends State<InputPassword> {
             const Text(
               "Foydalanish uchun parol kiriting ",
               textAlign: TextAlign.center,
-              style: TextStyle(color: AppColors.c1c1c1c, fontSize: 20, fontWeight: FontWeight.w500),
+              style: TextStyle(
+                  color: AppColors.c1c1c1c,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500),
             ),
             const SizedBox(
               height: 14,
@@ -51,7 +54,10 @@ class _InputPasswordState extends State<InputPassword> {
               textAlign: TextAlign.center,
               text: TextSpan(
                 style: const TextStyle(
-                    color: AppColors.c1c1c1c, fontSize: 14, fontWeight: FontWeight.w400, fontFamily: "Geometria"),
+                    color: AppColors.c1c1c1c,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    fontFamily: "Geometria"),
                 children: [
                   const TextSpan(
                     text:
@@ -89,7 +95,8 @@ class _InputPasswordState extends State<InputPassword> {
                   ),
                   child: TextFormField(
                     inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.allow(RegExp("[0-9@a-zA-Z.]")),
+                      FilteringTextInputFormatter.allow(
+                          RegExp("[0-9@a-zA-Z.]")),
                     ],
                     validator: validatePassword,
                     key: passwordKey,
@@ -125,7 +132,18 @@ class _InputPasswordState extends State<InputPassword> {
                           width: 1.5,
                         ),
                       ),
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                            color: AppColors.c1a73e8, width: 1.0),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                            color: AppColors.cfcfdf0, width: 1.0),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      contentPadding:
+                          const EdgeInsets.symmetric(horizontal: 16),
                     ),
                   ),
                 ),

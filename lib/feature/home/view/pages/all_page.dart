@@ -114,7 +114,8 @@ class _AllPageState extends State<AllPage> {
                                 onPressed: () {
                                   moreBottomSheet(context);
                                 },
-                                icon: SvgPicture.asset("assets/icons/post/more_icon.svg"),
+                                icon: SvgPicture.asset(
+                                    "assets/icons/post/more_icon.svg"),
                               ),
                             ),
                             Positioned(
@@ -128,27 +129,37 @@ class _AllPageState extends State<AllPage> {
                                     bottomLeft: Radius.circular(8),
                                     bottomRight: Radius.circular(8),
                                   ),
-                                  boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.5), blurRadius: 100)],
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black.withOpacity(0.5),
+                                        blurRadius: 100)
+                                  ],
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 16),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           Row(
                                             children: [
                                               CircleAvatar(
                                                 radius: 18,
-                                                backgroundImage: AssetImage(personImages[index]),
+                                                backgroundImage: AssetImage(
+                                                    personImages[index]),
                                               ),
                                               const SizedBox(width: 8),
                                               Text(
                                                 userName[index],
                                                 style: const TextStyle(
-                                                    fontSize: 14, fontWeight: FontWeight.bold, color: Colors.white),
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.white),
                                               ),
                                               const SizedBox(width: 34),
                                               SvgPicture.asset(
@@ -160,14 +171,20 @@ class _AllPageState extends State<AllPage> {
                                               const SizedBox(width: 4),
                                               const Text(
                                                 "400     1 soat oldin",
-                                                style: TextStyle(fontSize: 12, color: Colors.white),
+                                                style: TextStyle(
+                                                    fontSize: 12,
+                                                    color: Colors.white),
                                               ),
                                             ],
                                           ),
                                           Container(
                                             decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(8),
-                                              border: Border.all(color: Colors.white.withOpacity(0.5), width: 0.5),
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              border: Border.all(
+                                                  color: Colors.white
+                                                      .withOpacity(0.5),
+                                                  width: 0.5),
                                             ),
                                             child: InkWell(
                                               onTap: () {
@@ -179,10 +196,15 @@ class _AllPageState extends State<AllPage> {
                                                 height: 24,
                                                 alignment: Alignment.center,
                                                 child: Padding(
-                                                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                                                  padding: const EdgeInsets
+                                                      .symmetric(horizontal: 8),
                                                   child: Text(
-                                                    isFollowed ? 'Following' : 'Follow',
-                                                    style: const TextStyle(color: Colors.white, fontSize: 14),
+                                                    isFollowed
+                                                        ? 'Following'
+                                                        : 'Follow',
+                                                    style: const TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 14),
                                                   ),
                                                 ),
                                               ),
@@ -198,13 +220,17 @@ class _AllPageState extends State<AllPage> {
                                           });
                                         },
                                         child: ExpandableText(
+                                          animation: true,
+                                          expandOnTextTap: true,
                                           textOfPost[index],
-                                          expandText: '           ',
+                                          expandText: '',
                                           maxLines: 1,
                                           collapseOnTextTap: true,
                                           linkColor: Colors.white,
                                           style: const TextStyle(
-                                              color: Colors.white, fontSize: 14, fontWeight: FontWeight.w400),
+                                              color: Colors.white,
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w400),
                                         ),
                                       ),
                                     ],
@@ -227,17 +253,27 @@ class _AllPageState extends State<AllPage> {
                   Container(
                     width: 90,
                     height: 64,
-                    decoration: BoxDecoration(border: Border(bottom: BorderSide(width: 1, color: AppColors.cefefef))),
+                    decoration: const BoxDecoration(
+                        border: Border(
+                            bottom: BorderSide(
+                                width: 1, color: AppColors.cefefef))),
                     child: Center(
                       child: GestureDetector(
-                          onTap: () =>
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => const ChatPage())),
-                          child: SvgPicture.asset("assets/icons/tab_bar/notification.svg", width: 24, height: 24)),
+                          onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const ChatPage())),
+                          child: SvgPicture.asset(
+                              "assets/icons/tab_bar/notification.svg",
+                              width: 24,
+                              height: 24)),
                     ),
                   ),
                   const Spacer(),
                   RotatedWidget(
-                    imagePath: isLiked ? "assets/icons/tab_bar/like.svg" : "assets/icons/home/like_black.svg",
+                    imagePath: isLiked
+                        ? "assets/icons/tab_bar/like.svg"
+                        : "assets/icons/home/like_black.svg",
                     widht: 24,
                     height: 24,
                     text: "123..k",
@@ -258,7 +294,10 @@ class _AllPageState extends State<AllPage> {
                       height: 24,
                       text: "10",
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => const CommentPage()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const CommentPage()));
                       }),
                   RotatedWidget(
                     imagePath: "assets/icons/tab_bar/send.svg",
@@ -267,11 +306,10 @@ class _AllPageState extends State<AllPage> {
                     height: 24,
                     onPressed: () => showHorizontalBottomSheet(context),
                   ),
-                  RotatedWidget(
+                  const RotatedWidget(
                     imagePath: "assets/icons/tab_bar/saved.svg",
                     widht: 24,
                     height: 24,
-                    onPressed: () => showHorizontalBottomSheet(context),
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.05),
                 ],

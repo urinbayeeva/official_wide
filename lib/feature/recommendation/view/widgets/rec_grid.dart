@@ -218,35 +218,19 @@ class PostGrid extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ZoomedImagePage(imagePath: imagePath),
+            builder: (context) => ViewPost(
+              imagePath: imagePath,
+            ),
           ),
         );
       },
-      child: Hero(
-        tag: imagePath,
-        child: Image.asset(
-          imagePath,
-          fit: BoxFit.cover,
-        ),
-      ),
-    );
-  }
-}
-
-class ZoomedImagePage extends StatelessWidget {
-  final String imagePath;
-
-  const ZoomedImagePage({super.key, required this.imagePath});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Hero(
-          tag: imagePath,
-          child: Image.asset(imagePath),
-        ),
-      ),
+      // child: Hero(
+      //   tag: imagePath,
+      //   child: Image.asset(
+      //     imagePath,
+      //     fit: BoxFit.cover,
+      //   ),
+      // ),
     );
   }
 }

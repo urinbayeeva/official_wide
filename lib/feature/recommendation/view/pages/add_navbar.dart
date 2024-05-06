@@ -1,30 +1,31 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:wide/core/screens/all.dart';
-import 'package:wide/feature/recommendation/view/pages/rec_tabbar.dart';
+import 'package:wide/feature/custom_appbar.dart';
 import 'package:wide/feature/recommendation/view/widgets/add_navbar_item.dart';
 
-import '../../../custom_appbar.dart';
-
 class AddNavBar extends StatefulWidget {
-  final Function(bool) onRedCirclePressed;
-  const AddNavBar({super.key, required this.onRedCirclePressed});
+  final Function(bool)? onRedCirclePressed;
+  const AddNavBar({Key? key, this.onRedCirclePressed}) : super(key: key);
 
   @override
   State<AddNavBar> createState() => _AddNavBarState();
 }
 
 class _AddNavBarState extends State<AddNavBar> {
+  int index = 0;
+
   @override
   void initState() {
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-    SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft]);
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft]);
   }
 
   void handleRedCirclePressed(bool isPressed) {
-    widget.onRedCirclePressed(isPressed);
+    widget.onRedCirclePressed!(isPressed);
   }
-
-  int _itemCount = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -32,16 +33,29 @@ class _AddNavBarState extends State<AddNavBar> {
       backgroundColor: Colors.white,
       appBar: PreferredSize(
         preferredSize: const Size(double.infinity, 65),
-        child: buildAppBar(context,
-            contentWidget: const Text("Nav bar qo'shish",
-                style: TextStyle(
-                  color: AppColors.c1c1c1c,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                )),
-            showSearchIcon: true),
+        child: buildAppBar(
+          context,
+          contentWidget: Padding(
+            padding: const EdgeInsets.only(top: 12),
+            child: index == 1
+                ? const SearchTextField()
+                : const Text(
+                    "Nav bar qo'shish",
+                    style: TextStyle(
+                      color: AppColors.c1c1c1c,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+          ),
+          showSearchIcon: index == 1 ? false : true,
+          function: () {
+            setState(() {
+              index = 1;
+            });
+          },
+        ),
       ),
-      // ignore: prefer_const_constructors
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
@@ -60,11 +74,19 @@ class _AddNavBarState extends State<AddNavBar> {
                 children: [
                   Text(
                     "Tanlangan yo'nalishlar",
-                    style: TextStyle(color: AppColors.c1c1c1c, fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      color: AppColors.c1c1c1c,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   Text(
                     "Yo'nalish qatori to'lgan!",
-                    style: TextStyle(color: AppColors.cf92121, fontSize: 16, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      color: AppColors.cf92121,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
               ),
@@ -75,8 +97,14 @@ class _AddNavBarState extends State<AddNavBar> {
               const SizedBox(height: 16),
               const AddNavBarItem(),
               const SizedBox(height: 32),
-              const Text("Faqatgina 8 ta yo'nalish qo'shish mumkin",
-                  style: TextStyle(color: AppColors.cf92121, fontSize: 14, fontWeight: FontWeight.bold))
+              const Text(
+                "Faqatgina 8 ta yo'nalish qo'shish mumkin",
+                style: TextStyle(
+                  color: AppColors.cf92121,
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ),
+              )
             ],
           ),
         ),

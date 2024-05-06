@@ -8,7 +8,10 @@ class RoyhatdanOtishWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () => context.go("/registration"),
-        child:
-            Text(text!, style: const TextStyle(color: AppColors.c1a73e8, fontSize: 16, fontWeight: FontWeight.bold)));
+        child: Text(text!,
+            style: const TextStyle(
+                color: AppColors.c1a73e8,
+                fontSize: 16,
+                fontWeight: FontWeight.w500)));
   }
 }

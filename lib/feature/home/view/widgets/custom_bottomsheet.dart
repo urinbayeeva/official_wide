@@ -11,7 +11,7 @@ void showHorizontalBottomSheet(BuildContext context) {
       return Padding(
         padding: const EdgeInsets.symmetric(vertical: 20),
         child: SizedBox(
-          height: MediaQuery.of(context).size.height * 2,
+          height: MediaQuery.of(context).size.height - 100,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,

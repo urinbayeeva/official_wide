@@ -1,4 +1,5 @@
 import 'package:wide/core/screens/all.dart';
+import 'package:wide/feature/auth/view/pages/input_textfield.dart';
 
 class InputName extends StatelessWidget {
   const InputName({super.key});
@@ -19,7 +20,10 @@ class InputName extends StatelessWidget {
             const Text(
               "Foydalanish ismingizni tanlang ",
               textAlign: TextAlign.center,
-              style: TextStyle(color: AppColors.c1c1c1c, fontSize: 20, fontWeight: FontWeight.w500),
+              style: TextStyle(
+                  color: AppColors.c1c1c1c,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500),
             ),
             const SizedBox(
               height: 16,
@@ -27,7 +31,10 @@ class InputName extends StatelessWidget {
             const Text(
               textAlign: TextAlign.center,
               "Keyinchalik sizga bu nomni ozgartirish imkoniyati beriladi",
-              style: TextStyle(color: AppColors.c1c1c1c, fontSize: 15, fontWeight: FontWeight.w500),
+              style: TextStyle(
+                  color: AppColors.c1c1c1c,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500),
             ),
             const Spacer(),
             Center(

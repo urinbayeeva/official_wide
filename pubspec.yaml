@@ -1,13 +1,12 @@
 name: wide
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: "none"
 
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.3.1 <4.0.0'
+  sdk: ">=3.3.1 <4.0.0"
 dependencies:
-
   flutter:
     sdk: flutter
 
@@ -30,6 +29,10 @@ dependencies:
   vibration: ^1.8.4
   video_player: ^2.8.6
   appinio_video_player: ^1.2.2
+  voice_message_package: ^2.2.1
+  image_picker: ^1.1.1
+  chatview: ^1.3.1
+  flutter_riverpod: ^2.5.1
 
 dev_dependencies:
   flutter_test:
@@ -38,9 +41,7 @@ dev_dependencies:
   flutter_lints: ^3.0.0
 
 flutter:
-
   uses-material-design: true
-
 
   assets:
     - assets/images/
@@ -50,26 +51,26 @@ flutter:
     - assets/images/post/
     - assets/images/companies/
     - assets/icons/profile/
-    - assets/icons/home/return.svg
-    - assets/images/home/logo.png
-    - assets/icons/home/home_icon.svg
-    - assets/icons/profile/bluesave.png
+    # - assets/icons/home/return.svg
+    # - assets/images/home/logo.png
+    # - assets/icons/home/home_icon.svg
+    # - assets/icons/profile/bluesave.png
     - assets/icons/auth/
     - assets/images/home/
-    - assets/images/profile/menu.svg
+    # - assets/images/profile/menu.svg
     - assets/icons/post/
     - assets/icons/home/
     - assets/icons/tab_bar/
-    - assets/icons/tab_bar/notification.svg
-    - assets/icons/auth/auth_logo.svg
-    - assets/icons/auth/google.svg
-    - assets/icons/auth/facebook.svg
-    - assets/icons/auth/eye_icon.svg
-    - assets/icons/auth/off_eye_icon.svg
-    - assets/icons/home/plus.svg
-    - assets/icons/tab_bar/home_icon.svg
-    - assets/icons/tab_bar/search_icon.svg
-  
+    # - assets/icons/tab_bar/notification.svg
+    # - assets/icons/auth/auth_logo.svg
+    # - assets/icons/auth/google.svg
+    # - assets/icons/auth/facebook.svg
+    # - assets/icons/auth/eye_icon.svg
+    # - assets/icons/auth/off_eye_icon.svg
+    # - assets/icons/home/plus.svg
+    # - assets/icons/tab_bar/home_icon.svg
+    # - assets/icons/tab_bar/search_icon.svg
+
     - assets/icons/home/home_icon.svg
     - assets/icons/auth/apple.svg
     - assets/icons/
@@ -78,6 +79,8 @@ flutter:
     - family: Geometria
       fonts:
         - asset: assets/fonts/Geometria.ttf
+        # - asset: assets/fonts/Geometria-Medium.ttf
+        # - asset: assets/fonts/Geometria-Bold.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

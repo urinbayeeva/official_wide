@@ -1,10 +1,11 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wide/core/screens/all.dart';
 import 'core/router/go_router.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -22,12 +23,11 @@ class _MyAppState extends State<MyApp> {
           debugShowCheckedModeBanner: false,
           routerConfig: AppGoRouter.router,
           theme: ThemeData(
+              appBarTheme: AppBarTheme(backgroundColor: Colors.white),
               fontFamily: "Geometria",
               checkboxTheme: Theme.of(context).checkboxTheme.copyWith(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  )));
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)))));
     });
   }
 }

@@ -1,4 +1,5 @@
 import 'package:wide/core/screens/all.dart';
+import 'package:wide/feature/auth/view/pages/input_textfield.dart';
 
 class NewPassword extends StatefulWidget {
   const NewPassword({super.key});
@@ -22,7 +23,10 @@ class _NewPasswordState extends State<NewPassword> {
             const Spacer(),
             const Text(
               "Yangi parol yarating",
-              style: TextStyle(color: AppColors.c1c1c1c, fontSize: 15, fontWeight: FontWeight.w400),
+              style: TextStyle(
+                  color: AppColors.c1c1c1c,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w400),
             ),
             const Spacer(),
             Center(

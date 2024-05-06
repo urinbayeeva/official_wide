@@ -80,62 +80,8 @@ class LoginInputNumber extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Container(
-                  width: 83,
-                  height: 56,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(
-                      color: const Color(0xFFCFCFD0),
-                      width: 1,
-                    ),
-                  ),
-                  child: TextField(
-                    keyboardType: TextInputType.phone,
-                    controller: phoneCodeController,
-                    inputFormatters: [
-                      LengthLimitingTextInputFormatter(4),
-                      FilteringTextInputFormatter.allow(RegExp(r'[0-9+]')),
-                    ],
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "+998",
-                      hintStyle: TextStyle(
-                        color: Color(0xFFB7B7B7),
-                        fontSize: 16,
-                      ),
-                      contentPadding: EdgeInsets.symmetric(horizontal: 16),
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 250,
-                  height: 56,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(
-                      color: const Color(0xFFCFCFD0),
-                      width: 1,
-                    ),
-                  ),
-                  child: TextField(
-                    controller: phoneNumberController,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: [
-                      LengthLimitingTextInputFormatter(9),
-                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                    ],
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "90 000 00 00",
-                      hintStyle: TextStyle(
-                        color: Color(0xFFB7B7B7),
-                        fontSize: 16,
-                      ),
-                      contentPadding: EdgeInsets.symmetric(horizontal: 16),
-                    ),
-                  ),
-                ),
+                NumberTextField(),
+                const AllNumberTextField(),
               ],
             ),
             const SizedBox(
@@ -150,7 +96,10 @@ class LoginInputNumber extends StatelessWidget {
                   },
                   child: const Text(
                     "Parolni qayta kiritish",
-                    style: TextStyle(color: AppColors.c1a73e8, fontSize: 16, fontWeight: FontWeight.w400),
+                    style: TextStyle(
+                        color: AppColors.c1a73e8,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400),
                   ),
                 ),
               ],

@@ -1,25 +1,27 @@
+import 'package:chatview/chatview.dart';
 import 'package:wide/core/screens/all.dart';
 
-Widget buildAppBar(BuildContext context, {Widget? contentWidget, bool showSearchIcon = false}) {
+Widget buildAppBar(BuildContext context,
+    {Widget? contentWidget,
+    bool showSearchIcon = false,
+    VoidCallBack? function,
+    VoidCallBack? returnFunction}) {
   return AppBar(
     surfaceTintColor: Colors.white,
     automaticallyImplyLeading: false,
     backgroundColor: Colors.white,
     title: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          IconButton(
-            onPressed: () => Navigator.pop(context),
-            icon: SvgPicture.asset(
-              AppImages.returnIcon,
-            ),
-          ),
+          GestureDetector(
+              onTap: () => Navigator.pop(context),
+              child: SvgPicture.asset(AppImages.returnIcon)),
           contentWidget!,
           showSearchIcon
               ? IconButton(
-                  onPressed: () {},
+                  onPressed: function,
                   icon: SvgPicture.asset(AppImages.searchIcon),
                 )
               : const SizedBox()

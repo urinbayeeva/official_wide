@@ -6,8 +6,8 @@ void moreBottomSheet(BuildContext context) {
     context: context,
     builder: (BuildContext context) {
       return Container(
-          height: 320,
-          width: double.infinity,
+          height: 280,
+          width: MediaQuery.of(context).size.width,
           decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(
@@ -22,18 +22,26 @@ void moreBottomSheet(BuildContext context) {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                    IconButton(
-                        onPressed: () => Navigator.pop(context),
-                        icon: SvgPicture.asset("assets/icons/home/bottomsheet_cancel.svg")),
-                    Container(
-                        width: 41,
-                        height: 4,
-                        decoration:
-                            BoxDecoration(color: const Color(0xFFEFEFEF), borderRadius: BorderRadius.circular(27))),
-                    IconButton(
-                        onPressed: () {}, icon: Image.asset("assets/icons/profile/bluesave.png", width: 48, height: 48))
-                  ]),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        IconButton(
+                            onPressed: () => Navigator.pop(context),
+                            icon: SvgPicture.asset(
+                                "assets/icons/home/bottomsheet_cancel.svg")),
+                        Container(
+                            width: 41,
+                            height: 4,
+                            decoration: BoxDecoration(
+                                color: const Color(0xFFEFEFEF),
+                                borderRadius: BorderRadius.circular(27))),
+                        IconButton(
+                            onPressed: () {},
+                            icon: Image.asset(
+                                "assets/icons/profile/bluesave.png",
+                                width: 48,
+                                height: 48))
+                      ]),
                   const SizedBox(height: 24),
                   Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -43,19 +51,25 @@ void moreBottomSheet(BuildContext context) {
                         TextButton(
                           onPressed: () => context.goNamed("report"),
                           child: const Text(" Shikoyat",
-                              style: TextStyle(color: AppColors.c1c1c1c, fontWeight: FontWeight.w500)),
+                              style: TextStyle(
+                                  color: AppColors.c1c1c1c,
+                                  fontWeight: FontWeight.w500)),
                         )
                       ]),
                   const SizedBox(height: 24),
                   TextButton(
                       onPressed: () {},
                       child: const Text("Qiziqarsiz",
-                          style: TextStyle(color: AppColors.c1c1c1c, fontWeight: FontWeight.w500))),
+                          style: TextStyle(
+                              color: AppColors.c1c1c1c,
+                              fontWeight: FontWeight.w500))),
                   const SizedBox(height: 24),
                   TextButton(
                       onPressed: () {},
                       child: const Text("Qiziqarli",
-                          style: TextStyle(color: AppColors.c1c1c1c, fontWeight: FontWeight.w500)))
+                          style: TextStyle(
+                              color: AppColors.c1c1c1c,
+                              fontWeight: FontWeight.w500)))
                 ]))
           ]));
     },

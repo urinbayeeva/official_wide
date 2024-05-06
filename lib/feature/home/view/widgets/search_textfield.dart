@@ -8,7 +8,9 @@ class SearchTextField extends StatelessWidget {
     return Container(
       width: 275,
       height: 40,
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: const Color(0xFFF7F7F7)),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          color: const Color(0xFFF7F7F7)),
       child: const TextField(
         autocorrect: false,
         textAlignVertical: TextAlignVertical.center,
@@ -21,7 +23,7 @@ class SearchTextField extends StatelessWidget {
             fontSize: 14,
             fontWeight: FontWeight.w500,
           ),
-          contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 13.5),
+          contentPadding: EdgeInsets.symmetric(horizontal: 8),
         ),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:wide/core/screens/all.dart';
+import 'package:wide/feature/auth/view/pages/input_textfield.dart';
 
 class InputCode extends StatelessWidget {
   const InputCode({super.key});
@@ -20,7 +21,10 @@ class InputCode extends StatelessWidget {
               textAlign: TextAlign.center,
               text: TextSpan(
                 style: const TextStyle(
-                    color: AppColors.c1c1c1c, fontSize: 14, fontWeight: FontWeight.w400, fontFamily: "Geometria"),
+                    color: AppColors.c1c1c1c,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    fontFamily: "Geometria"),
                 children: [
                   const TextSpan(
                     text: "39 19 raqamiga sms kod yuborildi kodni \nkiriting",
@@ -63,7 +67,10 @@ class InputCode extends StatelessWidget {
                   onPressed: () {},
                   child: const Text(
                     "Raqamni qayta kiritish",
-                    style: TextStyle(color: AppColors.c1a73e8, fontSize: 16, fontWeight: FontWeight.w400),
+                    style: TextStyle(
+                        color: AppColors.c1a73e8,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400),
                   ),
                 ),
               ],
