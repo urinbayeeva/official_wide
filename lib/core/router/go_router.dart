@@ -1,6 +1,6 @@
 import 'package:wide/core/screens/all.dart';
-import 'package:wide/feature/home/view/pages/home_page.dart';
-import 'package:wide/feature/home/view/pages/inside_chat.dart';
+import 'package:wide/feature/posts/view/pages/add_post.dart';
+import 'package:wide/feature/posts/view/pages/post_posts.dart';
 import 'package:wide/feature/profile/view/pages/language_page.dart';
 
 class AppGoRouter {
@@ -10,7 +10,7 @@ class AppGoRouter {
       GoRoute(
           path: "/",
           name: "splashPage",
-          builder: (context, state) => const HomePage()),
+          builder: (context, state) => SplashPage()),
       GoRoute(
         path: "/choose",
         pageBuilder: (context, state) {
@@ -98,6 +98,10 @@ class AppGoRouter {
           path: "/homePage",
           builder: (builder, context) => const HomePage(),
           routes: [
+            GoRoute(
+                path: "cameraPage",
+                name: "camera",
+                builder: (builder, context) => const CameraPage()),
             GoRoute(
                 path: "reportPage",
                 name: "report",

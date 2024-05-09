@@ -10,6 +10,8 @@ class InputPassword extends StatefulWidget {
 class _InputPasswordState extends State<InputPassword> {
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+
     TextEditingController passwordController = TextEditingController();
     bool passwordVisible = true;
     final passwordKey = GlobalKey<FormState>();
@@ -44,8 +46,8 @@ class _InputPasswordState extends State<InputPassword> {
               textAlign: TextAlign.center,
               style: TextStyle(
                   color: AppColors.c1c1c1c,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500),
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold),
             ),
             const SizedBox(
               height: 14,
@@ -86,13 +88,6 @@ class _InputPasswordState extends State<InputPassword> {
                 child: Container(
                   width: double.infinity,
                   height: 56,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(
-                      color: const Color(0xFFCFCFD0),
-                      width: 1,
-                    ),
-                  ),
                   child: TextFormField(
                     inputFormatters: <TextInputFormatter>[
                       FilteringTextInputFormatter.allow(
@@ -150,16 +145,22 @@ class _InputPasswordState extends State<InputPassword> {
               ),
             ),
             const Spacer(),
+            const RoyhatdanOtishWidget(
+              text: "Kirish",
+            ),
+            SizedBox(height: screenHeight * 0.03),
             ButtonBlue(
               width: double.infinity,
-              color: AppColors.c1a73e8,
-              height: 53,
-              text: "Kirish",
-              onPressed: () => context.go("/profilePage"),
+              color: passwordController.text.isNotEmpty
+                  ? AppColors.c1a73e8
+                  : AppColors.c1a73e8,
+              height: 48,
+              text: "Keyingisi",
+              onPressed: () {
+                context.go("/inputSms");
+              },
             ),
-            const SizedBox(
-              height: 40,
-            ),
+            const SizedBox(height: 20),
           ],
         ),
       ),

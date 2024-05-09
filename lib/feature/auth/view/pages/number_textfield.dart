@@ -9,18 +9,17 @@ class NumberTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 83,
-      height: 56,
+      height: 48,
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(8),
           border: Border.all(width: 1, color: AppColors.cfcfdf0)),
-      child: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 13, vertical: 16),
+      child: const Center(
         child: Text(
           "+998",
           style: TextStyle(
               color: AppColors.c1c1c1c,
-              fontSize: 16,
+              fontSize: 15,
               fontWeight: FontWeight.w400),
         ),
       ),

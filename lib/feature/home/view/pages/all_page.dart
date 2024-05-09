@@ -21,10 +21,8 @@ class _AllPageState extends State<AllPage> {
   void initState() {
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeRight,
-      DeviceOrientation.landscapeLeft,
-    ]);
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft]);
   }
 
   List<String> wideImage = [
@@ -97,27 +95,21 @@ class _AllPageState extends State<AllPage> {
                         Stack(
                           children: [
                             SizedBox(
-                              height: MediaQuery.of(context).size.height,
-                              width: double.infinity,
-                              child: AspectRatio(
-                                aspectRatio: 16 / 10,
-                                child: Image.asset(
-                                  wideImage[index],
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
+                                height: MediaQuery.of(context).size.height,
+                                width: double.infinity,
+                                child: AspectRatio(
+                                    aspectRatio: 16 / 10,
+                                    child: Image.asset(wideImage[index],
+                                        fit: BoxFit.cover))),
                             Positioned(
-                              top: 12,
-                              right: 4,
-                              child: IconButton(
-                                onPressed: () {
-                                  moreBottomSheet(context);
-                                },
-                                icon: SvgPicture.asset(
-                                    "assets/icons/post/more_icon.svg"),
-                              ),
-                            ),
+                                top: 12,
+                                right: 4,
+                                child: IconButton(
+                                    onPressed: () {
+                                      moreBottomSheet(context);
+                                    },
+                                    icon: SvgPicture.asset(
+                                        "assets/icons/post/more_icon.svg"))),
                             Positioned(
                               bottom: 8,
                               left: 0,
@@ -126,9 +118,8 @@ class _AllPageState extends State<AllPage> {
                                 padding: const EdgeInsets.all(8),
                                 decoration: BoxDecoration(
                                   borderRadius: const BorderRadius.only(
-                                    bottomLeft: Radius.circular(8),
-                                    bottomRight: Radius.circular(8),
-                                  ),
+                                      bottomLeft: Radius.circular(8),
+                                      bottomRight: Radius.circular(8)),
                                   boxShadow: [
                                     BoxShadow(
                                         color: Colors.black.withOpacity(0.5),

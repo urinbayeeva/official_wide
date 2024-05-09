@@ -23,7 +23,7 @@ class _MyAppState extends State<MyApp> {
           debugShowCheckedModeBanner: false,
           routerConfig: AppGoRouter.router,
           theme: ThemeData(
-              appBarTheme: AppBarTheme(backgroundColor: Colors.white),
+              appBarTheme: const AppBarTheme(backgroundColor: Colors.white),
               fontFamily: "Geometria",
               checkboxTheme: Theme.of(context).checkboxTheme.copyWith(
                   shape: RoundedRectangleBorder(

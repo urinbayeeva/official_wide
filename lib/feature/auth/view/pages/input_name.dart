@@ -6,7 +6,10 @@ class InputName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
     TextEditingController userNameController = TextEditingController();
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
@@ -22,41 +25,41 @@ class InputName extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                   color: AppColors.c1c1c1c,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500),
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600),
             ),
-            const SizedBox(
-              height: 16,
-            ),
+            const SizedBox(height: 16),
             const Text(
               textAlign: TextAlign.center,
-              "Keyinchalik sizga bu nomni ozgartirish imkoniyati beriladi",
+              "Keyinchalik sizga bu nomni ozgartirish\nimkoniyati beriladi",
               style: TextStyle(
                   color: AppColors.c1c1c1c,
-                  fontSize: 15,
+                  fontSize: 14,
                   fontWeight: FontWeight.w500),
             ),
             const Spacer(),
-            Center(
-              child: InputTextField(
-                controller: userNameController,
-                name: "ismingiz",
-                showPasswordToggle: false,
-              ),
+            InputTextField(
+              controller: userNameController,
+              name: "ismingiz",
+              showPasswordToggle: false,
             ),
             const Spacer(),
+            const RoyhatdanOtishWidget(
+              text: "Kirish",
+            ),
+            SizedBox(height: screenHeight * 0.03),
             ButtonBlue(
               width: double.infinity,
-              color: AppColors.c1a73e8,
-              height: 53,
+              color: userNameController.text.isNotEmpty
+                  ? AppColors.c1a73e8
+                  : AppColors.c1a73e8,
+              height: 48,
               text: "Keyingisi",
               onPressed: () {
-                context.goNamed("passInput");
+                context.go("/inputPass");
               },
             ),
-            const SizedBox(
-              height: 40,
-            ),
+            const SizedBox(height: 20),
           ],
         ),
       ),

@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wide/core/screens/all.dart';
 
 class InputTextField extends StatefulWidget {
@@ -10,13 +8,13 @@ class InputTextField extends StatefulWidget {
   final bool? showText;
 
   const InputTextField({
-    Key? key,
+    super.key,
     this.name,
     this.icon,
     this.controller,
     this.showPasswordToggle = true,
     this.showText,
-  }) : super(key: key);
+  });
 
   @override
   State<InputTextField> createState() => _InputTextFieldState();
@@ -36,7 +34,7 @@ class _InputTextFieldState extends State<InputTextField> {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 56,
+      height: 48,
       child: TextField(
         cursorColor: AppColors.c1a73e8,
         obscureText: widget.showText != null && !widget.showText!,
@@ -49,7 +47,7 @@ class _InputTextFieldState extends State<InputTextField> {
         decoration: InputDecoration(
           suffixIcon: _showClearButton
               ? IconButton(
-                  icon: Icon(Icons.clear, color: Colors.grey),
+                  icon: const Icon(Icons.clear, color: Colors.grey),
                   onPressed: () {
                     setState(() {
                       widget.controller!.clear();
@@ -58,19 +56,33 @@ class _InputTextFieldState extends State<InputTextField> {
                   },
                 )
               : widget.showPasswordToggle
-                  ? IconButton(
-                      icon: Icon(
+                  ?
+                  // ? IconButton(
+                  //     icon: Icon(
+                  //       _passwordVisible
+                  //           ? Icons.visibility
+                  //           : Icons.visibility_off,
+                  //       color: Colors.grey,
+                  //       size: 20,
+                  //     ),
+                  //     onPressed: () {
+                  //       setState(() {
+                  //         _passwordVisible = !_passwordVisible;
+                  //       });
+                  //     },
+                  //   )
+                  GestureDetector(
+                      child: Image.asset(
                         _passwordVisible
-                            ? Icons.visibility
-                            : Icons.visibility_off,
-                        color: Colors.grey,
+                            ? "assets/images/eye_open.png"
+                            : "assets/images/eye_closes.png",
+                        scale: 4.5,
                       ),
-                      onPressed: () {
+                      onTap: () {
                         setState(() {
                           _passwordVisible = !_passwordVisible;
                         });
-                      },
-                    )
+                      })
                   : null,
           focusedBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: AppColors.c1a73e8, width: 1.0),
@@ -82,7 +94,7 @@ class _InputTextFieldState extends State<InputTextField> {
           ),
           border: InputBorder.none,
           hintText: widget.name,
-          hintStyle: const TextStyle(color: Color(0xFFB7B7B7), fontSize: 16),
+          hintStyle: const TextStyle(color: Color(0xFFB7B7B7), fontSize: 14),
           contentPadding:
               const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
         ),

@@ -15,7 +15,7 @@ class _LoginInputSmsState extends State<LoginInputSms> {
 
   String get timerText {
     if (timerMaxSeconds - currentSeconds <= 0) {
-      return "Did not get a code";
+      return "Kod kelmadimi?";
     } else {
       return '${((timerMaxSeconds - currentSeconds) ~/ 60).toString().padLeft(2, '0')}: ${((timerMaxSeconds - currentSeconds) % 60).toString().padLeft(2, '0')}';
     }
@@ -40,23 +40,24 @@ class _LoginInputSmsState extends State<LoginInputSms> {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
     TextEditingController codeController = TextEditingController();
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(
-              height: 104,
-            ),
+            SizedBox(height: screenHeight * 0.20),
             RichText(
               textAlign: TextAlign.center,
               text: TextSpan(
                 style: const TextStyle(
                   color: AppColors.c1c1c1c,
-                  fontSize: 16,
+                  fontSize: 14,
                   fontWeight: FontWeight.w400,
                   fontFamily: "Geometria",
                 ),
@@ -72,24 +73,20 @@ class _LoginInputSmsState extends State<LoginInputSms> {
                     text: " raqamni qayta kiritish?",
                     style: const TextStyle(
                       color: AppColors.c1a73e8,
-                      fontSize: 16,
+                      fontSize: 14,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
                 ],
               ),
             ),
-            const Spacer(),
-            Center(
-              child: InputTextField(
-                controller: codeController,
-                showPasswordToggle: false,
-                name: "Sms kod",
-              ),
+            SizedBox(height: screenHeight * 0.15),
+            InputTextField(
+              controller: codeController,
+              showPasswordToggle: false,
+              name: "Sms kod",
             ),
-            const SizedBox(
-              height: 16,
-            ),
+            const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -99,7 +96,7 @@ class _LoginInputSmsState extends State<LoginInputSms> {
                     timerText,
                     style: const TextStyle(
                       color: AppColors.c1a73e8,
-                      fontSize: 16,
+                      fontSize: 14,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
@@ -107,18 +104,19 @@ class _LoginInputSmsState extends State<LoginInputSms> {
               ],
             ),
             const Spacer(),
+            const Spacer(),
             ButtonBlue(
               width: double.infinity,
-              color: AppColors.c1a73e8,
-              height: 53,
+              color: codeController.text.isNotEmpty
+                  ? AppColors.c1a73e8
+                  : AppColors.c1a73e8,
+              height: 48,
               text: "Kirish",
               onPressed: () {
-                context.goNamed("newPass");
+                context.go("/homePage");
               },
             ),
-            const SizedBox(
-              height: 40,
-            ),
+            const SizedBox(height: 20),
           ],
         ),
       ),

@@ -1,82 +1,30 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'package:flutter/services.dart';
 import 'package:wide/core/screens/all.dart';
 
 class LoginInputNumber extends StatelessWidget {
-  const LoginInputNumber({Key? key}) : super(key: key);
-
-  // Future<void> sendSmsCode(BuildContext context, String phoneCode, String phoneNumber) async {
-  //   final String url = 'http://95.47.238.47:5000/api-client/Login/SendSmsCode';
-  //   Map<String, dynamic> requestBody = {
-  //     'phoneCode': phoneCode,
-  //     'phoneNumber': phoneNumber,
-  //   };
-
-  //   String encodedBody = jsonEncode(requestBody);
-
-  //   try {
-  //     final http.Response response = await http.post(
-  //       Uri.parse(url),
-  //       headers: <String, String>{
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: encodedBody,
-  //     );
-
-  //     if (response.statusCode == 200) {
-  //       // Request successful, handle response as needed
-  //       print('SMS Code Sent Successfully');
-  //       // Navigate to the input SMS code page
-  //       context.go("/inputSms");
-  //     } else {
-  //       // Handle unsuccessful request
-  //       print('Failed to send SMS code: ${response.statusCode}');
-  //       // Show error message to the user
-  //       ScaffoldMessenger.of(context).showSnackBar(
-  //         SnackBar(
-  //           content: Text('Failed to send SMS code. Please try again later.'),
-  //         ),
-  //       );
-  //     }
-  //   } catch (error) {
-  //     // Handle any errors that occurred during the request
-  //     print('Error: $error');
-  //     // Show error message to the user
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(
-  //         content: Text('An unexpected error occurred. Please try again later.'),
-  //       ),
-  //     );
-  //   }
-  // }
+  const LoginInputNumber({super.key});
 
   @override
   Widget build(BuildContext context) {
     TextEditingController phoneNumberController = TextEditingController();
     TextEditingController phoneCodeController = TextEditingController();
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.white,
+      resizeToAvoidBottomInset: false,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(
-              height: 104,
-            ),
-            const Text(
-              "Raqamingizni kiriting va sizga sms\n xabar yuboriladi ",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: AppColors.c1c1c1c,
-                fontSize: 16,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-            const Spacer(),
+            SizedBox(height: screenHeight * 0.20),
+            const Text("Raqamingizni kiriting va sizga sms\n xabar yuboriladi ",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    color: AppColors.c1c1c1c,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400)),
+            SizedBox(height: screenHeight * 0.15),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
@@ -84,58 +32,32 @@ class LoginInputNumber extends StatelessWidget {
                 const AllNumberTextField(),
               ],
             ),
-            const SizedBox(
-              height: 16,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                GestureDetector(
+            const SizedBox(height: 16),
+            Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+              GestureDetector(
                   onTap: () {
                     context.go("/login");
                   },
-                  child: const Text(
-                    "Parolni qayta kiritish",
-                    style: TextStyle(
-                        color: AppColors.c1a73e8,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400),
-                  ),
-                ),
-              ],
-            ),
+                  child: const Text("Parolni qayta kiritish",
+                      style: TextStyle(
+                          color: AppColors.c1a73e8,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400)))
+            ]),
             const Spacer(),
-            GestureDetector(
-              onTap: () {
-                context.go("/registration");
-              },
-              child: const Text(
-                "Ro'yhatdan o'tish",
-                style: TextStyle(
-                  color: AppColors.c1a73e8,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 31,
-            ),
+            const RoyhatdanOtishWidget(text: "Ro'yxatdan o'tish"),
+            SizedBox(height: screenHeight * 0.03),
             ButtonBlue(
-              width: double.infinity,
-              color: AppColors.c1a73e8,
-              height: 53,
-              text: "Kirish",
-              onPressed: () {
-                String phoneCode = phoneCodeController.text;
-                String phoneNumber = phoneNumberController.text;
-                // sendSmsCode(context, phoneCode, phoneNumber);
-                context.go("/inputSms");
-              },
-            ),
-            const SizedBox(
-              height: 40,
-            ),
+                width: double.infinity,
+                color: phoneNumberController.text.isNotEmpty
+                    ? AppColors.c1a73e8
+                    : AppColors.c1a73e8,
+                height: 48,
+                text: "Kirish",
+                onPressed: () {
+                  context.go("/inputSms");
+                }),
+            const SizedBox(height: 20),
           ],
         ),
       ),

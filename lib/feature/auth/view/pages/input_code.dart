@@ -6,6 +6,8 @@ class InputCode extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
     TextEditingController codeController = TextEditingController();
     return Scaffold(
       backgroundColor: Colors.white,
@@ -14,9 +16,7 @@ class InputCode extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(
-              height: 104,
-            ),
+            SizedBox(height: screenHeight * 0.20),
             RichText(
               textAlign: TextAlign.center,
               text: TextSpan(
@@ -49,7 +49,7 @@ class InputCode extends StatelessWidget {
                 ],
               ),
             ),
-            const Spacer(),
+            SizedBox(height: screenHeight * 0.15),
             Center(
               child: InputTextField(
                 controller: codeController,

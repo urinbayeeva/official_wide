@@ -11,7 +11,7 @@ class RoyhatdanOtishWidget extends StatelessWidget {
         child: Text(text!,
             style: const TextStyle(
                 color: AppColors.c1a73e8,
-                fontSize: 16,
+                fontSize: 14,
                 fontWeight: FontWeight.w500)));
   }
 }

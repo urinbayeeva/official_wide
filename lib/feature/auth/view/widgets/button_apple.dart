@@ -7,7 +7,8 @@ Widget customElevatedButton({
   return ElevatedButton(
     onPressed: onPressed,
     style: ButtonStyle(
-      fixedSize: MaterialStateProperty.all<Size>(const Size(double.infinity, 56)),
+      fixedSize:
+          MaterialStateProperty.all<Size>(const Size(double.infinity, 50)),
       shape: MaterialStateProperty.all<OutlinedBorder>(
         RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
