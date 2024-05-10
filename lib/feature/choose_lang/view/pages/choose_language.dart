@@ -48,7 +48,7 @@ class _ChooseLanguageState extends State<ChooseLanguage> {
                                 });
                               },
                               child: Container(
-                                  height: 44,
+                                  height: 40,
                                   width: double.infinity,
                                   decoration: BoxDecoration(
                                       color: const Color(0xFFF1F5F9),
@@ -85,7 +85,7 @@ class _ChooseLanguageState extends State<ChooseLanguage> {
                                     Text(lang[index],
                                         style: const TextStyle(
                                             color: Color(0xFF1C1C1C),
-                                            fontSize: 14,
+                                            fontSize: 13,
                                             fontWeight: FontWeight.w600))
                                   ])));
                         }).toList(),

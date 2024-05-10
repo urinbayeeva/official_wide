@@ -8,9 +8,17 @@ class RotatedWidget extends StatelessWidget {
   final double? widht;
   final double? height;
   final String? text;
+  final TextStyle? style;
 
   const RotatedWidget(
-      {super.key, this.onPressed, this.quarterTurns, this.imagePath, this.height, this.widht, this.text = ""});
+      {super.key,
+      this.onPressed,
+      this.quarterTurns,
+      this.imagePath,
+      this.height,
+      this.widht,
+      this.text = "",
+      this.style});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +38,11 @@ class RotatedWidget extends StatelessWidget {
           const SizedBox(height: 6),
           Text(
             text!,
-            style: const TextStyle(color: AppColors.c1c1c1c, fontSize: 11, fontWeight: FontWeight.bold),
+            style: style ??
+                const TextStyle(
+                    color: AppColors.c1c1c1c,
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold),
           ),
         ],
       ),

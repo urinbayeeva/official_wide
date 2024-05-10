@@ -42,61 +42,67 @@ class _HomePageState extends State<HomePage> {
           children: [
             _currentPageIndex == 0
                 ? SizedBox.shrink()
-                : NavigationRail(
-                    backgroundColor: Colors.white,
-                    onDestinationSelected: (index) =>
-                        setState(() => _currentPageIndex = index),
-                    labelType: NavigationRailLabelType.none,
-                    useIndicator: false,
-                    minWidth: 80,
-                    leading: _currentPageIndex == 2
-                        ? const SizedBox.shrink()
-                        : Container(
-                            decoration: const BoxDecoration(
-                                border: Border(
-                                    bottom: BorderSide(
-                                        width: 1, color: AppColors.cefefef))),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 18),
-                              child: SvgPicture.asset(
-                                  "assets/icons/home/wide.svg"),
-                            )),
-                    destinations: <NavigationRailDestination>[
-                      NavigationRailDestination(
-                        indicatorColor: Colors.transparent,
-                        icon: Padding(
-                          padding: const EdgeInsets.only(left: 20, top: 30),
-                          child: Image.asset(
-                              "assets/icons/tab_bar/add_post.png",
-                              width: 24,
-                              height: 24),
-                        ),
-                        label: const Text(""),
-                      ),
-                      NavigationRailDestination(
-                        icon: Padding(
-                          padding: const EdgeInsets.only(left: 20, top: 28),
-                          child: SvgPicture.asset(AppImages.personIcon),
-                        ),
-                        label: const Text(""),
-                      ),
-                      NavigationRailDestination(
-                        icon: Padding(
-                          padding: const EdgeInsets.only(left: 20, top: 28),
-                          child: SvgPicture.asset(AppImages.searchIcon),
-                        ),
-                        label: const Text(""),
-                      ),
-                      NavigationRailDestination(
-                        icon: Padding(
-                          padding: const EdgeInsets.only(left: 20, top: 28),
-                          child: SvgPicture.asset(AppImages.homeIcon),
-                        ),
-                        label: const Text(""),
-                      ),
-                    ],
-                    selectedIndex: _currentPageIndex),
+                : SizedBox(
+                    width: 75,
+                    child: NavigationRail(
+                        backgroundColor: Colors.white,
+                        onDestinationSelected: (index) =>
+                            setState(() => _currentPageIndex = index),
+                        labelType: NavigationRailLabelType.none,
+                        useIndicator: false,
+                        leading: _currentPageIndex == 2
+                            ? const SizedBox.shrink()
+                            : Container(
+                                decoration: const BoxDecoration(
+                                    border: Border(
+                                        bottom: BorderSide(
+                                            width: 1,
+                                            color: AppColors.cefefef))),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 18),
+                                  child: SvgPicture.asset(
+                                      "assets/icons/home/wide.svg"),
+                                )),
+                        destinations: <NavigationRailDestination>[
+                          NavigationRailDestination(
+                            indicatorColor: Colors.transparent,
+                            icon: Padding(
+                              padding: const EdgeInsets.only(left: 20, top: 30),
+                              child: Image.asset(
+                                  "assets/icons/tab_bar/add_post.png",
+                                  width: 22,
+                                  height: 22),
+                            ),
+                            label: const Text(""),
+                          ),
+                          NavigationRailDestination(
+                            icon: Padding(
+                              padding: const EdgeInsets.only(left: 20, top: 28),
+                              child: SvgPicture.asset(AppImages.personIcon,
+                                  width: 22, height: 22),
+                            ),
+                            label: const Text(""),
+                          ),
+                          NavigationRailDestination(
+                            icon: Padding(
+                              padding: const EdgeInsets.only(left: 20, top: 28),
+                              child: SvgPicture.asset(AppImages.searchIcon,
+                                  width: 22, height: 22),
+                            ),
+                            label: const Text(""),
+                          ),
+                          NavigationRailDestination(
+                            icon: Padding(
+                              padding: const EdgeInsets.only(left: 20, top: 28),
+                              child: SvgPicture.asset(AppImages.homeIcon,
+                                  width: 22, height: 22),
+                            ),
+                            label: const Text(""),
+                          ),
+                        ],
+                        selectedIndex: _currentPageIndex),
+                  ),
             Expanded(child: buildPages()),
           ],
         ),

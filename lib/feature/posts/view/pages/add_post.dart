@@ -40,7 +40,6 @@ class _CameraPageState extends State<CameraPage> {
                     '${testDir.path}/${DateTime.now().millisecondsSinceEpoch}.jpg';
                 return SingleCaptureRequest(filePath, sensors.first);
               } else {
-                // Separate pictures taken with front and back camera
                 return MultipleCaptureRequest(
                   {
                     for (final sensor in sensors)
@@ -60,8 +59,7 @@ class _CameraPageState extends State<CameraPage> {
                 fallbackStrategy: QualityFallbackStrategy.lower,
               ),
             ),
-            exifPreferences:
-                null, // Remove the GPS icon by setting exifPreferences to null
+            exifPreferences: null,
           ),
           sensorConfig: SensorConfig.single(
             sensor: Sensor.position(SensorPosition.back),

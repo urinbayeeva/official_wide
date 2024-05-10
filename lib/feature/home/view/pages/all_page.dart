@@ -1,31 +1,61 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:video_player/video_player.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:wide/core/screens/all.dart';
-import 'package:wide/feature/home/view/pages/chat_page.dart';
-import 'package:wide/feature/home/view/pages/comment_page.dart';
 
 class AllPage extends StatefulWidget {
-  const AllPage({super.key});
+  const AllPage({Key? key}) : super(key: key);
 
   @override
   State<AllPage> createState() => _AllPageState();
 }
 
 class _AllPageState extends State<AllPage> {
-  // int _selectedIndex = 0;
-  bool isTappedText = false;
-  bool isLiked = false;
-  int likeCount = 0;
-  bool isFollowed = false;
+  late List<VideoPlayerController> _videoControllers = [];
+  late List<bool> _isVideoPlaying = [];
+  late PageController _pageController;
 
   @override
   void initState() {
     super.initState();
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+    _initializeVideoPlayers();
+    _pageController = PageController();
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft]);
   }
 
-  List<String> wideImage = [
+  void _initializeVideoPlayers() {
+    List videoUrls = contentList
+        .where((element) => element.toString().contains('.mp4'))
+        .toList();
+
+    for (String videoUrl in videoUrls) {
+      VideoPlayerController controller = VideoPlayerController.asset(videoUrl);
+      _videoControllers.add(controller);
+      _isVideoPlaying.add(false);
+      controller.initialize().then((_) {
+        setState(() {});
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    for (VideoPlayerController controller in _videoControllers) {
+      controller.dispose();
+    }
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  List<dynamic> contentList = [
+    "assets/images/mine.mp4",
+    "assets/videos/domla.mp4",
+    "assets/videos/nature.mp4",
+    "assets/images/mine.MP4",
+    "assets/images/mem.jpg",
+    "assets/images/i.png",
     "assets/images/i.png",
     "assets/images/o.png",
     "assets/images/q.png",
@@ -71,244 +101,345 @@ class _AllPageState extends State<AllPage> {
 
   List<String> comments = [];
   int currentPageIndex = 0;
+  bool isTappedText = false;
+  bool isLiked = false;
+  int likeCount = 0;
+  bool isFollowed = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: OrientationBuilder(builder: (context, orientation) {
-        return Row(
-          children: [
-            Expanded(
-                flex: 8,
-                child: PageView.builder(
+      body: Row(
+        children: [
+          Expanded(
+            child: NotificationListener<ScrollNotification>(
+              onNotification: (scrollNotification) {
+                if (scrollNotification is ScrollStartNotification) {
+                  _pauseAllVideos();
+                }
+                return false;
+              },
+              child: PageView.builder(
+                  controller: _pageController,
                   onPageChanged: (index) {
                     setState(() {
                       currentPageIndex = index;
                     });
                   },
                   scrollDirection: Axis.vertical,
-                  itemCount: wideImage.length,
+                  itemCount: contentList.length,
                   itemBuilder: (context, index) {
-                    return Column(
+                    if (contentList[index].toString().contains('.mp4')) {
+                      return _buildVideoWidget(index);
+                    } else {
+                      return _buildImageWidget(contentList[index]);
+                    }
+                  }),
+            ),
+          ),
+          SizedBox(
+            width: 75,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 90,
+                  height: 64,
+                  decoration: const BoxDecoration(
+                      border: Border(
+                          bottom:
+                              BorderSide(width: 1, color: AppColors.cefefef))),
+                  child: Center(
+                    child: GestureDetector(
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const ChatPage())),
+                        child: SvgPicture.asset(
+                            "assets/icons/tab_bar/notification.svg",
+                            width: 22,
+                            height: 22)),
+                  ),
+                ),
+                const Spacer(),
+                RotatedWidget(
+                  imagePath: isLiked
+                      ? "assets/icons/tab_bar/like.svg"
+                      : "assets/icons/home/like_black.svg",
+                  widht: 22,
+                  height: 22,
+                  text: "123..k",
+                  onPressed: () {
+                    setState(() {
+                      if (isLiked) {
+                        likeCount--;
+                      } else {
+                        likeCount++;
+                      }
+                      isLiked = !isLiked;
+                    });
+                  },
+                ),
+                RotatedWidget(
+                    imagePath: "assets/icons/tab_bar/messsage_icon.svg",
+                    widht: 22,
+                    height: 22,
+                    text: "10",
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const CommentPage()));
+                    }),
+                RotatedWidget(
+                  imagePath: "assets/icons/tab_bar/send.svg",
+                  text: "102",
+                  widht: 22,
+                  height: 22,
+                  onPressed: () => showHorizontalBottomSheet(context),
+                ),
+                const RotatedWidget(
+                  imagePath: "assets/icons/tab_bar/saved.svg",
+                  widht: 22,
+                  height: 22,
+                ),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildVideoWidget(int index) {
+    return _videoControllers[index].value.isInitialized
+        ? Stack(
+            children: [
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    if (_videoControllers[index].value.isPlaying) {
+                      _videoControllers[index].pause();
+                    } else {
+                      _videoControllers[index].play();
+                    }
+                  });
+                },
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height,
+                  width: double.infinity,
+                  child: AspectRatio(
+                    aspectRatio: _videoControllers[index].value.aspectRatio,
+                    child:
+                        ClipRRect(child: VideoPlayer(_videoControllers[index])),
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 12,
+                right: 4,
+                child: IconButton(
+                  onPressed: () {
+                    moreBottomSheet(context);
+                  },
+                  icon: SvgPicture.asset(
+                    "assets/icons/post/more_icon.svg",
+                  ),
+                ),
+              ),
+              Positioned(
+                bottom: 8,
+                left: 0,
+                right: 0,
+                child: Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(8),
+                      bottomRight: Radius.circular(8),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.5),
+                        blurRadius: 100,
+                      ),
+                    ],
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Stack(
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            SizedBox(
-                                height: MediaQuery.of(context).size.height,
-                                width: double.infinity,
-                                child: AspectRatio(
-                                    aspectRatio: 16 / 10,
-                                    child: Image.asset(wideImage[index],
-                                        fit: BoxFit.cover))),
-                            Positioned(
-                                top: 12,
-                                right: 4,
-                                child: IconButton(
-                                    onPressed: () {
-                                      moreBottomSheet(context);
-                                    },
-                                    icon: SvgPicture.asset(
-                                        "assets/icons/post/more_icon.svg"))),
-                            Positioned(
-                              bottom: 8,
-                              left: 0,
-                              right: 0,
-                              child: Container(
-                                padding: const EdgeInsets.all(8),
-                                decoration: BoxDecoration(
-                                  borderRadius: const BorderRadius.only(
-                                      bottomLeft: Radius.circular(8),
-                                      bottomRight: Radius.circular(8)),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Colors.black.withOpacity(0.5),
-                                        blurRadius: 100)
-                                  ],
+                            Row(
+                              children: [
+                                CircleAvatar(
+                                  radius: 18,
+                                  backgroundImage:
+                                      AssetImage(personImages[index]),
                                 ),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 16),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              CircleAvatar(
-                                                radius: 18,
-                                                backgroundImage: AssetImage(
-                                                    personImages[index]),
-                                              ),
-                                              const SizedBox(width: 8),
-                                              Text(
-                                                userName[index],
-                                                style: const TextStyle(
-                                                    fontSize: 14,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.white),
-                                              ),
-                                              const SizedBox(width: 34),
-                                              SvgPicture.asset(
-                                                AppImages.eyeIcon,
-                                                color: Colors.white,
-                                                width: 18,
-                                                height: 18,
-                                              ),
-                                              const SizedBox(width: 4),
-                                              const Text(
-                                                "400     1 soat oldin",
-                                                style: TextStyle(
-                                                    fontSize: 12,
-                                                    color: Colors.white),
-                                              ),
-                                            ],
-                                          ),
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              border: Border.all(
-                                                  color: Colors.white
-                                                      .withOpacity(0.5),
-                                                  width: 0.5),
-                                            ),
-                                            child: InkWell(
-                                              onTap: () {
-                                                setState(() {
-                                                  isFollowed = !isFollowed;
-                                                });
-                                              },
-                                              child: Container(
-                                                height: 24,
-                                                alignment: Alignment.center,
-                                                child: Padding(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(horizontal: 8),
-                                                  child: Text(
-                                                    isFollowed
-                                                        ? 'Following'
-                                                        : 'Follow',
-                                                    style: const TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 14),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
+                                const SizedBox(width: 8),
+                                Text(
+                                  userName[index],
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                const SizedBox(width: 34),
+                                SvgPicture.asset(
+                                  AppImages.eyeIcon,
+                                  color: Colors.white,
+                                  width: 18,
+                                  height: 18,
+                                ),
+                                const SizedBox(width: 4),
+                                const Text(
+                                  "400     1 soat oldin",
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(
+                                  color: Colors.white.withOpacity(0.5),
+                                  width: 0.5,
+                                ),
+                              ),
+                              child: InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    isFollowed = !isFollowed;
+                                  });
+                                },
+                                child: Container(
+                                  height: 24,
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 8,
+                                    ),
+                                    child: Text(
+                                      isFollowed ? 'Following' : 'Follow',
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 14,
                                       ),
-                                      const SizedBox(height: 10),
-                                      GestureDetector(
-                                        onTap: () {
-                                          setState(() {
-                                            isTappedText = !isTappedText;
-                                          });
-                                        },
-                                        child: ExpandableText(
-                                          animation: true,
-                                          expandOnTextTap: true,
-                                          textOfPost[index],
-                                          expandText: '',
-                                          maxLines: 1,
-                                          collapseOnTextTap: true,
-                                          linkColor: Colors.white,
-                                          style: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w400),
-                                        ),
-                                      ),
-                                    ],
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
                           ],
                         ),
-                        // const SizedBox(height: 8),
-                        // const Divider(),
+                        const SizedBox(height: 10),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              isTappedText = !isTappedText;
+                            });
+                          },
+                          child: ExpandableText(
+                            animation: true,
+                            expandOnTextTap: true,
+                            textOfPost[index],
+                            expandText: '',
+                            maxLines: 1,
+                            collapseOnTextTap: true,
+                            linkColor: Colors.white,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
                       ],
-                    );
-                  },
-                )),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 90,
-                    height: 64,
-                    decoration: const BoxDecoration(
-                        border: Border(
-                            bottom: BorderSide(
-                                width: 1, color: AppColors.cefefef))),
-                    child: Center(
-                      child: GestureDetector(
-                          onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const ChatPage())),
-                          child: SvgPicture.asset(
-                              "assets/icons/tab_bar/notification.svg",
-                              width: 24,
-                              height: 24)),
                     ),
                   ),
-                  const Spacer(),
-                  RotatedWidget(
-                    imagePath: isLiked
-                        ? "assets/icons/tab_bar/like.svg"
-                        : "assets/icons/home/like_black.svg",
-                    widht: 24,
-                    height: 24,
-                    text: "123..k",
-                    onPressed: () {
-                      setState(() {
-                        if (isLiked) {
-                          likeCount--;
-                        } else {
-                          likeCount++;
-                        }
-                        isLiked = !isLiked;
-                      });
-                    },
-                  ),
-                  RotatedWidget(
-                      imagePath: "assets/icons/tab_bar/messsage_icon.svg",
-                      widht: 24,
-                      height: 24,
-                      text: "10",
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const CommentPage()));
-                      }),
-                  RotatedWidget(
-                    imagePath: "assets/icons/tab_bar/send.svg",
-                    text: "102",
-                    widht: 24,
-                    height: 24,
-                    onPressed: () => showHorizontalBottomSheet(context),
-                  ),
-                  const RotatedWidget(
-                    imagePath: "assets/icons/tab_bar/saved.svg",
-                    widht: 24,
-                    height: 24,
-                  ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.05),
-                ],
+                ),
               ),
+              // Play/Pause Button
+              Positioned.fill(
+                child: AnimatedSwitcher(
+                  duration: Duration(milliseconds: 200),
+                  child: !_videoControllers[index].value.isPlaying
+                      ? GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              if (_videoControllers[index].value.isPlaying) {
+                                _videoControllers[index].pause();
+                              } else {
+                                _videoControllers[index].play();
+                              }
+                            });
+                          },
+                          child: Container(
+                            color: Colors.transparent,
+                            child: Icon(
+                              _videoControllers[index].value.isPlaying
+                                  ? Icons.pause
+                                  : Icons.play_arrow,
+                              color: Colors.white,
+                              size: 40,
+                            ),
+                          ),
+                        )
+                      : SizedBox.shrink(),
+                ),
+              ),
+              // Progress indicator
+              Positioned(
+                left: 20,
+                right: 16,
+                bottom: 8,
+                child: ValueListenableBuilder<VideoPlayerValue>(
+                  valueListenable: _videoControllers[index],
+                  builder: (context, value, _) {
+                    final progress = value.position.inMilliseconds /
+                        value.duration.inMilliseconds;
+                    return LinearProgressIndicator(
+                      minHeight: 1,
+                      value: progress.isNaN ? 0.0 : progress,
+                      backgroundColor: Colors.white,
+                      valueColor: const AlwaysStoppedAnimation<Color>(
+                        AppColors.c1a73e8,
+                      ), // Adjust color as needed
+                    );
+                  },
+                ),
+              ),
+            ],
+          )
+        : const Center(
+            child: CircularProgressIndicator(
+              color: AppColors.c1a73e8,
             ),
-          ],
-        );
-      }),
+          );
+  }
+
+  Widget _buildImageWidget(String imageUrl) {
+    return Image.asset(
+      imageUrl,
+      fit: BoxFit.contain,
     );
+  }
+
+  void _pauseAllVideos() {
+    for (VideoPlayerController controller in _videoControllers) {
+      if (controller.value.isPlaying) {
+        controller.pause();
+      }
+    }
   }
 }
