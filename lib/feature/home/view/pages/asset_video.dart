@@ -1,6 +1,5 @@
 import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
 
 class AssetPlayerVideo extends StatefulWidget {
   const AssetPlayerVideo({super.key});
@@ -23,7 +22,8 @@ class _AssetPlayerVideoState extends State<AssetPlayerVideo> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomVideoPlayer(customVideoPlayerController: _customVideoPlayerController);
+    return CustomVideoPlayer(
+        customVideoPlayerController: _customVideoPlayerController);
   }
 
   void initVideoPlayer() {
@@ -32,7 +32,7 @@ class _AssetPlayerVideoState extends State<AssetPlayerVideo> {
       ..initialize().then((value) {
         setState(() {});
       });
-    _customVideoPlayerController =
-        CustomVideoPlayerController(context: context, videoPlayerController: _videoPlayerController);
+    _customVideoPlayerController = CustomVideoPlayerController(
+        context: context, videoPlayerController: _videoPlayerController);
   }
 }

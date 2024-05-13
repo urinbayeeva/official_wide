@@ -1,13 +1,15 @@
 import 'package:wide/core/screens/all.dart';
+import 'package:wide/feature/custom_appbar.dart';
+import 'package:wide/feature/profile/view/widgets/profile_name_pics.dart';
 
-class MyFollowers extends StatefulWidget {
-  const MyFollowers({super.key});
+class MyFollowing extends StatefulWidget {
+  const MyFollowing({super.key});
 
   @override
-  State<MyFollowers> createState() => _MyFollowersState();
+  State<MyFollowing> createState() => _MyFollowingState();
 }
 
-class _MyFollowersState extends State<MyFollowers> {
+class _MyFollowingState extends State<MyFollowing> {
   @override
   void initState() {
     super.initState();
@@ -21,62 +23,59 @@ class _MyFollowersState extends State<MyFollowers> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> MyFollowersName = ["Wide", "Wide", "Wide", "Wide", "Wide", "Wide", "Wide"];
-    String MyFollowersFullName = "Coming soon";
-
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                  onPressed: () => Navigator.pop(context),
-                  icon: SvgPicture.asset(
-                    AppImages.returnIcon,
-                  ),
+        appBar: PreferredSize(
+          preferredSize: const Size(double.infinity, 65),
+          child: buildAppBar(context,
+              contentWidget: const Text(
+                "Obunachilar",
+                style: TextStyle(
+                  color: AppColors.c1c1c1c,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
                 ),
-                const SearchTextField(),
-                IconButton(
-                  onPressed: () {},
-                  icon: SvgPicture.asset(
-                    AppImages.searchIcon,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(width: double.infinity, height: 1, color: const Color(0xFFEFEFEF)),
+              ),
+              showSearchIcon: true),
+        ),
+        backgroundColor: Colors.white,
+        body: Column(children: [
+          Container(
+              width: double.infinity,
+              height: 1,
+              color: const Color(0xFFEFEFEF)),
           Expanded(
             child: ListView.builder(
-              itemCount: MyFollowersName.length,
+              itemCount: followersName.length,
               itemBuilder: (BuildContext context, int index) {
                 return ListTile(
-                  title: Text(
-                    MyFollowersName[index],
-                    style: const TextStyle(color: AppColors.c1c1c1c, fontSize: 20, fontWeight: FontWeight.w500),
+                  title: Text(followersName[index],
+                      style: const TextStyle(
+                          color: AppColors.c1c1c1c,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600)),
+                  subtitle: Text(followersFullName,
+                      style: const TextStyle(
+                          color: AppColors.c707071,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500)),
+                  leading: CircleAvatar(
+                      radius: 28, backgroundImage: AssetImage(images[index])),
+                  trailing: ButtonBlue(
+                    onPressed: () {
+                      setState(() {
+                        isFollowed = !isFollowed;
+                      });
+                    },
+                    width: 170,
+                    height: 34,
+                    text: isFollowed ? "Followed" : "Follow",
+                    textColor: isFollowed ? AppColors.c1c1c1c : Colors.white,
+                    color: isFollowed ? AppColors.cf7f7f7 : AppColors.c1a73e8,
                   ),
-                  subtitle: Text(
-                    MyFollowersFullName,
-                    style: const TextStyle(color: AppColors.c707071, fontSize: 14, fontWeight: FontWeight.w500),
-                  ),
-                  leading: const CircleAvatar(radius: 40, backgroundColor: Colors.grey),
-                  trailing: const Expanded(
-                      child: ButtonBlue(
-                          width: 126,
-                          height: 40,
-                          text: "Following",
-                          color: Color(0xFFF7F7F7),
-                          textColor: AppColors.c1c1c1c)),
                 );
               },
             ),
-          ),
-        ],
-      ),
-    );
+          )
+        ]));
   }
 }

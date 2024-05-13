@@ -56,3 +56,8 @@ export 'package:wide/feature/profile/view/pages/statistic_page.dart';
 export 'package:wide/feature/recommendation/view/pages/add_navbar.dart';
 export 'package:wide/feature/recommendation/view/pages/rec_tabbar.dart';
 export 'package:wide/feature/recommendation/view/pages/view_post.dart';
+export 'package:wide/feature/home/view/pages/all_page.dart';
+export 'package:wide/feature/posts/view/pages/add_post.dart';
+export 'package:wide/feature/profile/view/pages/my_profile.dart';
+export 'package:video_player/video_player.dart';
+export 'package:expandable_text/expandable_text.dart';

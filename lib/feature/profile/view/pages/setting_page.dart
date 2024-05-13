@@ -14,7 +14,8 @@ class _SettingPageState extends State<SettingPage> {
   void initState() {
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-    SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft]);
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft]);
   }
 
   @override
@@ -37,15 +38,36 @@ class _SettingPageState extends State<SettingPage> {
         body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(children: [
-              _buildSettingItem("assets/icons/auth/lang_icon.svg", "Til",
-                  () => Navigator.push(context, MaterialPageRoute(builder: (context) => const LanguagePage()))),
-              _buildSettingItem("assets/icons/profile/bell.svg", "Bildirishnomalar",
-                  () => Navigator.push(context, MaterialPageRoute(builder: (context) => const NotificationPage()))),
-              _buildSettingItem("assets/icons/profile/user.svg", "Foydalanuvchi ma'lumotlari",
-                  () => Navigator.push(context, MaterialPageRoute(builder: (context) => const UserInfo()))),
-              _buildSettingItem("assets/icons/profile/info.svg", "Admin",
-                  () => Navigator.push(context, MaterialPageRoute(builder: (context) => const AdminPage()))),
-              _buildSettingItem("assets/icons/profile/log_out.svg", "Chiqish", () {
+              _buildSettingItem(
+                  "assets/icons/auth/lang_icon.svg",
+                  "Til",
+                  () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LanguagePage()))),
+              _buildSettingItem(
+                  "assets/icons/profile/bell.svg",
+                  "Bildirishnomalar",
+                  () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const NotificationPage()))),
+              _buildSettingItem(
+                  "assets/icons/profile/user.svg",
+                  "Foydalanuvchi ma'lumotlari",
+                  () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const UserInfo()))),
+              _buildSettingItem(
+                  "assets/icons/profile/info.svg",
+                  "Admin",
+                  () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AdminPage()))),
+              _buildSettingItem("assets/icons/profile/log_out.svg", "Chiqish",
+                  () {
                 _showLogoutDialog();
               })
             ])));
@@ -57,7 +79,10 @@ class _SettingPageState extends State<SettingPage> {
         child: MouseRegion(
             cursor: SystemMouseCursors.click,
             child: Container(
-                decoration: const BoxDecoration(border: Border(bottom: BorderSide(width: 1, color: AppColors.cefefef))),
+                decoration: const BoxDecoration(
+                    border: Border(
+                        bottom:
+                            BorderSide(width: 1, color: AppColors.cefefef))),
                 child: Padding(
                     padding: const EdgeInsets.all(16),
                     child: Row(children: [
@@ -65,7 +90,10 @@ class _SettingPageState extends State<SettingPage> {
                       const SizedBox(width: 16),
                       Text(
                         title,
-                        style: const TextStyle(color: AppColors.c1c1c1c, fontSize: 16, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                            color: AppColors.c1c1c1c,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold),
                       )
                     ])))));
   }
@@ -77,12 +105,18 @@ class _SettingPageState extends State<SettingPage> {
       ),
       child: Row(
         children: [
-          IconButton(onPressed: () => context.goNamed("menu"), icon: SvgPicture.asset(AppImages.returnIcon)),
+          IconButton(
+              onPressed: () => Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => MenuPage())),
+              icon: SvgPicture.asset(AppImages.returnIcon)),
           const Spacer(),
           const Padding(
               padding: EdgeInsets.symmetric(vertical: 20),
               child: Text("Sozlamalar",
-                  style: TextStyle(color: AppColors.c1c1c1c, fontSize: 20, fontWeight: FontWeight.bold))),
+                  style: TextStyle(
+                      color: AppColors.c1c1c1c,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold))),
           const Spacer(),
         ],
       ),
@@ -94,12 +128,16 @@ class _SettingPageState extends State<SettingPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8.0))),
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(8.0))),
           backgroundColor: Colors.white,
           title: const Center(
             child: Text(
               "Akauntni tark etish?",
-              style: TextStyle(color: AppColors.c1c1c1c, fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  color: AppColors.c1c1c1c,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold),
             ),
           ),
           content: Column(
@@ -108,7 +146,10 @@ class _SettingPageState extends State<SettingPage> {
             children: [
               const Text(
                 "Akauntni tarki etmoqchimisiz sizning\nakauntingiz saqlab qolinadi va ",
-                style: TextStyle(color: AppColors.c1c1c1c, fontSize: 16, fontWeight: FontWeight.w400),
+                style: TextStyle(
+                    color: AppColors.c1c1c1c,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400),
               ),
               const SizedBox(height: 48),
               Container(
@@ -122,7 +163,10 @@ class _SettingPageState extends State<SettingPage> {
                     onTap: () {},
                     child: const Text(
                       "Akkauntdan chiqish",
-                      style: TextStyle(color: AppColors.c1a73e8, fontSize: 16, fontWeight: FontWeight.w500),
+                      style: TextStyle(
+                          color: AppColors.c1a73e8,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500),
                     ),
                   ),
                 ),
@@ -138,7 +182,10 @@ class _SettingPageState extends State<SettingPage> {
                     onTap: () => Navigator.pop(context),
                     child: const Text(
                       "Ortga qaytish",
-                      style: TextStyle(color: AppColors.c1c1c1c, fontSize: 16, fontWeight: FontWeight.w500),
+                      style: TextStyle(
+                          color: AppColors.c1c1c1c,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500),
                     ),
                   ),
                 ),

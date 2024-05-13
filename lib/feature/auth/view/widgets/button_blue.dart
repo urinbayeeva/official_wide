@@ -28,7 +28,7 @@ class ButtonBlue extends StatelessWidget {
           backgroundColor: MaterialStateProperty.all(color ?? Colors.blue),
           shape: MaterialStateProperty.all(
             RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(8),
             ),
           ),
           elevation: MaterialStateProperty.all(0),
@@ -39,7 +39,7 @@ class ButtonBlue extends StatelessWidget {
           style: TextStyle(
             color: textColor ?? Colors.white,
             fontSize: 14,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w600,
           ),
         ),
       ),

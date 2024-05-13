@@ -285,7 +285,8 @@ class _RecTabBarState extends State<RecTabBar> with TickerProviderStateMixin {
         ),
         if (widget.showSearchIcon)
           IconButton(
-            onPressed: () => context.goNamed("search"),
+            onPressed: () => Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const SearchPage())),
             icon: SvgPicture.asset(AppImages.searchIcon, width: 24, height: 24),
           ),
       ],

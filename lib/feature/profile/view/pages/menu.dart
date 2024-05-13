@@ -12,7 +12,8 @@ class _MenuPageState extends State<MenuPage> {
   void initState() {
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-    SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft]);
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft]);
   }
 
   @override
@@ -30,12 +31,20 @@ class _MenuPageState extends State<MenuPage> {
         body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: ListView(children: [
-              _buildSettingItem("assets/icons/profile/saved.svg", "Saqlanganlar", () => context.goNamed("savedPage")),
               _buildSettingItem(
-                  "assets/icons/profile/settings.svg", "Sozlamalar", () => context.goNamed("settingPage")),
-              _buildSettingItem("assets/icons/profile/payment.svg", "To'lov", () {}),
+                  "assets/icons/profile/saved.svg", "Saqlanganlar", () {
+                Navigator.pushNamed(context, "savedPage");
+              }),
               _buildSettingItem(
-                  "assets/icons/profile/statistic.svg", "Statistika", () => context.goNamed("statistikaPage"))
+                  "assets/icons/profile/settings.svg", "Sozlamalar", () {
+                Navigator.pushNamed(context, "settingPage");
+              }),
+              _buildSettingItem(
+                  "assets/icons/profile/payment.svg", "To'lov", () {}),
+              _buildSettingItem(
+                  "assets/icons/profile/statistic.svg", "Statistika", () {
+                Navigator.pushNamed(context, "statistikaPage");
+              }),
             ])));
   }
 
@@ -45,7 +54,10 @@ class _MenuPageState extends State<MenuPage> {
         child: MouseRegion(
             cursor: SystemMouseCursors.click,
             child: Container(
-                decoration: const BoxDecoration(border: Border(bottom: BorderSide(width: 1, color: AppColors.cefefef))),
+                decoration: const BoxDecoration(
+                    border: Border(
+                        bottom:
+                            BorderSide(width: 1, color: AppColors.cefefef))),
                 child: Padding(
                     padding: const EdgeInsets.all(16),
                     child: Row(children: [
@@ -53,7 +65,10 @@ class _MenuPageState extends State<MenuPage> {
                       const SizedBox(width: 16),
                       Text(
                         title,
-                        style: const TextStyle(color: AppColors.c1c1c1c, fontSize: 16, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                            color: AppColors.c1c1c1c,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold),
                       )
                     ])))));
   }
@@ -63,7 +78,7 @@ class _MenuPageState extends State<MenuPage> {
         padding: const EdgeInsets.symmetric(vertical: 20),
         child: Row(children: [
           IconButton(
-            onPressed: () => context.go("/homePage/profilePage"),
+            onPressed: () => Navigator.pop(context),
             icon: SvgPicture.asset(AppImages.returnIcon),
           ),
           const Spacer(),
@@ -71,7 +86,10 @@ class _MenuPageState extends State<MenuPage> {
               padding: EdgeInsets.symmetric(vertical: 20),
               child: Text(
                 "Menu",
-                style: TextStyle(color: AppColors.c1c1c1c, fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    color: AppColors.c1c1c1c,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
               )),
           const Spacer(),
         ]));

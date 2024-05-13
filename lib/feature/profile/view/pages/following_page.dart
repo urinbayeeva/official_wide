@@ -33,7 +33,9 @@ class _FollowingPageState extends State<FollowingPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   icon: SvgPicture.asset(
                     AppImages.returnIcon,
                   ),

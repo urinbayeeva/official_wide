@@ -46,15 +46,15 @@ class _SavedPageState extends State<SavedPage> {
       ),
       body: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          crossAxisSpacing: 8,
-          mainAxisSpacing: 8,
-        ),
+            crossAxisCount: 3,
+            crossAxisSpacing: 4,
+            mainAxisSpacing: 4,
+            childAspectRatio: 2.0),
         itemCount: savedImages.length,
         itemBuilder: (context, index) {
           return Image.asset(
             savedImages[index],
-            fit: BoxFit.contain,
+            fit: BoxFit.cover,
           );
         },
       ),
@@ -67,13 +67,16 @@ class _SavedPageState extends State<SavedPage> {
       child: Row(
         children: [
           IconButton(
-            onPressed: () => context.goNamed("menu"),
+            onPressed: () => Navigator.pop(context),
             icon: SvgPicture.asset(AppImages.returnIcon),
           ),
           const Spacer(),
           const Text(
             "Saqlanganlar",
-            style: TextStyle(color: AppColors.c1c1c1c, fontSize: 20, fontWeight: FontWeight.bold),
+            style: TextStyle(
+                color: AppColors.c1c1c1c,
+                fontSize: 20,
+                fontWeight: FontWeight.bold),
           ),
           const Spacer(),
         ],

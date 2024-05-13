@@ -1,11 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:video_player/video_player.dart';
-import 'package:expandable_text/expandable_text.dart';
 import 'package:wide/core/screens/all.dart';
 
 class AllPage extends StatefulWidget {
-  const AllPage({Key? key}) : super(key: key);
+  const AllPage({super.key});
 
   @override
   State<AllPage> createState() => _AllPageState();
@@ -83,9 +79,9 @@ class _AllPageState extends State<AllPage> {
     "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit",
     "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga",
     "Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum",
-    ". Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
-    ". Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
-    ". Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+    "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
+    "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
+    "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
   ];
 
   List<String> personImages = [
@@ -113,31 +109,29 @@ class _AllPageState extends State<AllPage> {
       body: Row(
         children: [
           Expanded(
-            child: NotificationListener<ScrollNotification>(
-              onNotification: (scrollNotification) {
-                if (scrollNotification is ScrollStartNotification) {
-                  _pauseAllVideos();
-                }
-                return false;
-              },
-              child: PageView.builder(
-                  controller: _pageController,
-                  onPageChanged: (index) {
-                    setState(() {
-                      currentPageIndex = index;
-                    });
-                  },
-                  scrollDirection: Axis.vertical,
-                  itemCount: contentList.length,
-                  itemBuilder: (context, index) {
-                    if (contentList[index].toString().contains('.mp4')) {
-                      return _buildVideoWidget(index);
-                    } else {
-                      return _buildImageWidget(contentList[index]);
+              child: NotificationListener<ScrollNotification>(
+                  onNotification: (scrollNotification) {
+                    if (scrollNotification is ScrollStartNotification) {
+                      _pauseAllVideos();
                     }
-                  }),
-            ),
-          ),
+                    return false;
+                  },
+                  child: PageView.builder(
+                      controller: _pageController,
+                      onPageChanged: (index) {
+                        setState(() {
+                          currentPageIndex = index;
+                        });
+                      },
+                      scrollDirection: Axis.vertical,
+                      itemCount: contentList.length,
+                      itemBuilder: (context, index) {
+                        if (contentList[index].toString().contains('.mp4')) {
+                          return _buildVideoWidget(index);
+                        } else {
+                          return _buildImageWidget(contentList[index], index);
+                        }
+                      }))),
           SizedBox(
             width: 75,
             child: Column(
@@ -156,10 +150,8 @@ class _AllPageState extends State<AllPage> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => const ChatPage())),
-                        child: SvgPicture.asset(
-                            "assets/icons/tab_bar/notification.svg",
-                            width: 22,
-                            height: 22)),
+                        child: SvgPicture.asset("assets/icons/tab_bar/wmw.svg",
+                            width: 20, height: 20)),
                   ),
                 ),
                 const Spacer(),
@@ -214,8 +206,11 @@ class _AllPageState extends State<AllPage> {
   }
 
   Widget _buildVideoWidget(int index) {
+    double videoWidth = _videoControllers[index].value.size.width;
+    double videoHeight = _videoControllers[index].value.size.height;
     return _videoControllers[index].value.isInitialized
         ? Stack(
+            fit: StackFit.loose,
             children: [
               GestureDetector(
                 onTap: () {
@@ -228,27 +223,36 @@ class _AllPageState extends State<AllPage> {
                   });
                 },
                 child: SizedBox(
-                  height: MediaQuery.of(context).size.height,
-                  width: double.infinity,
-                  child: AspectRatio(
-                    aspectRatio: _videoControllers[index].value.aspectRatio,
-                    child:
-                        ClipRRect(child: VideoPlayer(_videoControllers[index])),
-                  ),
-                ),
+                    height: videoHeight,
+                    width: videoWidth,
+                    child: VideoPlayer(_videoControllers[index])),
               ),
               Positioned(
                 top: 12,
                 right: 4,
-                child: IconButton(
-                  onPressed: () {
-                    moreBottomSheet(context);
-                  },
-                  icon: SvgPicture.asset(
-                    "assets/icons/post/more_icon.svg",
+                child: Container(
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.5),
+                        blurRadius: 100,
+                      ),
+                    ],
+                  ),
+                  child: IconButton(
+                    onPressed: () {
+                      moreBottomSheet(context);
+                    },
+                    icon: RotatedBox(
+                      quarterTurns: 1,
+                      child: SvgPicture.asset(
+                        "assets/icons/post/more_icon.svg",
+                      ),
+                    ),
                   ),
                 ),
               ),
+
               Positioned(
                 bottom: 8,
                 left: 0,
@@ -428,10 +432,159 @@ class _AllPageState extends State<AllPage> {
           );
   }
 
-  Widget _buildImageWidget(String imageUrl) {
-    return Image.asset(
-      imageUrl,
-      fit: BoxFit.contain,
+  Widget _buildImageWidget(String imageUrl, int index) {
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        Image.asset(
+          imageUrl,
+          fit: BoxFit.contain,
+        ),
+        Positioned(
+          top: 12,
+          right: 4,
+          child: Container(
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.5),
+                  blurRadius: 100,
+                ),
+              ],
+            ),
+            child: IconButton(
+              onPressed: () {
+                moreBottomSheet(context);
+              },
+              icon: RotatedBox(
+                quarterTurns: 1,
+                child: SvgPicture.asset(
+                  "assets/icons/post/more_icon.svg",
+                ),
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+          bottom: 8,
+          left: 0,
+          right: 0,
+          child: Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(8),
+                bottomRight: Radius.circular(8),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.5),
+                  blurRadius: 100,
+                ),
+              ],
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          CircleAvatar(
+                            radius: 18,
+                            backgroundImage: AssetImage(personImages[index]),
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            userName[index],
+                            style: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(width: 34),
+                          SvgPicture.asset(
+                            AppImages.eyeIcon,
+                            color: Colors.white,
+                            width: 18,
+                            height: 18,
+                          ),
+                          const SizedBox(width: 4),
+                          const Text(
+                            "400     1 soat oldin",
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(
+                            color: Colors.white.withOpacity(0.5),
+                            width: 0.5,
+                          ),
+                        ),
+                        child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              isFollowed = !isFollowed;
+                            });
+                          },
+                          child: Container(
+                            height: 24,
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                              ),
+                              child: Text(
+                                isFollowed ? 'Following' : 'Follow',
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isTappedText = !isTappedText;
+                      });
+                    },
+                    child: ExpandableText(
+                      animation: true,
+                      expandOnTextTap: true,
+                      textOfPost[index],
+                      expandText: '',
+                      maxLines: 1,
+                      collapseOnTextTap: true,
+                      linkColor: Colors.white,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 

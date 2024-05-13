@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:wide/core/screens/all.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -31,7 +32,8 @@ class _SplashPageState extends State<SplashPage>
 
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        context.go('/choose');
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => ChooseLanguage()));
       }
     });
 

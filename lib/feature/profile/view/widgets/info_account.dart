@@ -10,10 +10,13 @@ class InfoAccount extends StatelessWidget {
         child: Container(
             width: 363,
             height: 80,
-            decoration: BoxDecoration(color: const Color(0xFFF7F7F7), borderRadius: BorderRadius.circular(16)),
+            decoration: BoxDecoration(
+                color: const Color(0xFFF7F7F7),
+                borderRadius: BorderRadius.circular(16)),
             child: Center(
                 child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 8),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 30, vertical: 8),
                     child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -25,13 +28,18 @@ class InfoAccount extends StatelessWidget {
                                 GestureDetector(
                                   child: const Text(
                                     "36",
-                                    style:
-                                        TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.c1c1c1c),
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
+                                        color: AppColors.c1c1c1c),
                                   ),
                                 ),
                                 const Text(
                                   "Posts",
-                                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xFF707071)),
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                      color: Color(0xFF707071)),
                                 ),
                               ],
                             ),
@@ -40,25 +48,41 @@ class InfoAccount extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               GestureDetector(
-                                onTap: () => context.goNamed("followersPage"),
+                                onTap: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => FollowingPage())),
                                 child: const Text("12K",
-                                    style:
-                                        TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.c1c1c1c)),
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
+                                        color: AppColors.c1c1c1c)),
                               ),
                               const Text(
                                 "Followers",
-                                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xFF707071)),
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    color: Color(0xFF707071)),
                               ),
                             ],
                           ),
-                          const Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-                            Text("98",
-                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.c1c1c1c)),
-                            Text(
-                              "Followers",
-                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xFF707071)),
-                            )
-                          ])
+                          const Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("98",
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
+                                        color: AppColors.c1c1c1c)),
+                                Text(
+                                  "Followers",
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                      color: Color(0xFF707071)),
+                                )
+                              ])
                         ])))));
   }
 }

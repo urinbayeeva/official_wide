@@ -1,14 +1,17 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:wide/core/screens/all.dart';
-import 'package:wide/feature/profile/view/pages/edit_profile.dart';
+import 'package:wide/feature/profile/view/widgets/profile_name_pics.dart';
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+class MyProfilePage extends StatefulWidget {
+  const MyProfilePage({super.key});
 
   @override
-  State<ProfilePage> createState() => _ProfilePageState();
+  State<MyProfilePage> createState() => _MyProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage>
+class _MyProfilePageState extends State<MyProfilePage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   bool isFollowed = false;
@@ -44,29 +47,6 @@ class _ProfilePageState extends State<ProfilePage>
       body: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // Padding(
-          //     padding: const EdgeInsets.only(top: 16),
-          //     child: Expanded(
-          //         child: SizedBox(
-          //             child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-          //       SizedBox(
-          //           child: IconButton(
-          //               onPressed: () {}, icon: SvgPicture.asset("assets/icons/home/wide.svg", width: 50, height: 40))),
-          //       const SizedBox(height: 40),
-          //       Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          //         const SizedBox(width: 10),
-          //         Column(children: [
-          //           RotatedWidget(imagePath: AppImages.plusIcon, onPressed: () {}),
-          //           const SizedBox(height: 12),
-          //           RotatedWidget(imagePath: AppImages.personYellow, onPressed: () {}),
-          //           const SizedBox(height: 12),
-          //           RotatedWidget(imagePath: AppImages.searchIcon, onPressed: () {}),
-          //           const SizedBox(height: 12),
-          //           RotatedWidget(imagePath: AppImages.homeIcon, onPressed: () => context.go("/homePage"))
-          //         ])
-          //       ])
-          //     ])))),
-          // Second Column
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(top: 16.0),
@@ -82,16 +62,8 @@ class _ProfilePageState extends State<ProfilePage>
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           const SizedBox(width: 12),
-                          GestureDetector(
-                              onTap: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const EditProfile())),
-                              child: Image.asset(
-                                  "assets/icons/profile/person_ava.png",
-                                  width: 64,
-                                  height: 64)),
+                          Image.asset("assets/icons/profile/person_ava.png",
+                              width: 64, height: 64),
                           const SizedBox(width: 15),
                           const Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -118,15 +90,18 @@ class _ProfilePageState extends State<ProfilePage>
                                   padding: const EdgeInsets.symmetric(
                                       vertical: 10, horizontal: 8),
                                   child: Row(children: [
-                                    const Text(
-                                      "Posts",
-                                      style: TextStyle(
-                                          color: AppColors.c707071,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w400),
+                                    const Padding(
+                                      padding: EdgeInsets.only(left: 12),
+                                      child: Text(
+                                        "Posts",
+                                        style: TextStyle(
+                                            color: AppColors.c707071,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400),
+                                      ),
                                     ),
                                     const SizedBox(width: 8),
-                                    const Text("36",
+                                    const Text("3",
                                         style: TextStyle(
                                             color: AppColors.c1c1c1c,
                                             fontSize: 16,
@@ -145,23 +120,44 @@ class _ProfilePageState extends State<ProfilePage>
                                               fontWeight: FontWeight.w400)),
                                     ),
                                     const SizedBox(width: 8),
-                                    const Text("12.2K",
-                                        style: TextStyle(
-                                            color: AppColors.c1c1c1c,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold)),
+                                    GestureDetector(
+                                      onTap: () => Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const Followers())),
+                                      child: const Text("250",
+                                          style: TextStyle(
+                                              color: AppColors.c1c1c1c,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold)),
+                                    ),
                                     const SizedBox(width: 24),
-                                    const Text("Following",
-                                        style: TextStyle(
-                                            color: AppColors.c707071,
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w400)),
+                                    GestureDetector(
+                                      onTap: () => Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const MyFollowing())),
+                                      child: const Text("Following",
+                                          style: TextStyle(
+                                              color: AppColors.c707071,
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w400)),
+                                    ),
                                     const SizedBox(width: 8),
-                                    const Text("98",
-                                        style: TextStyle(
-                                            color: AppColors.c1c1c1c,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold)),
+                                    GestureDetector(
+                                      onTap: () => Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const MyFollowing())),
+                                      child: const Text("10",
+                                          style: TextStyle(
+                                              color: AppColors.c1c1c1c,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold)),
+                                    ),
                                     const SizedBox(width: 24),
                                   ]))),
                           const SizedBox(width: 24),
@@ -169,7 +165,7 @@ class _ProfilePageState extends State<ProfilePage>
                               onPressed: () => Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => MenuPage())),
+                                      builder: (context) => const MenuPage())),
                               icon: SvgPicture.asset(
                                   "assets/icons/profile/menu.svg",
                                   width: 24,
@@ -194,30 +190,22 @@ class _ProfilePageState extends State<ProfilePage>
                                 fontWeight: FontWeight.w600,
                                 color: AppColors.c707071),
                           ),
-                          const SizedBox(width: 24),
-                          ButtonBlue(
-                            onPressed: () {
-                              setState(() {
-                                isFollowed = !isFollowed;
-                              });
-                            },
-                            width: 170,
-                            height: 34,
-                            text: isFollowed ? "Followed" : "Follow",
-                            textColor:
-                                isFollowed ? AppColors.c1c1c1c : Colors.white,
-                            color: isFollowed
-                                ? AppColors.cf7f7f7
-                                : AppColors.c1a73e8,
+                          const SizedBox(width: 40),
+                          Expanded(
+                            child: ButtonBlue(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const EditProfile()));
+                                },
+                                height: 38,
+                                text: "Edit",
+                                color: AppColors.cf7f7f7,
+                                textColor: AppColors.c1c1c1c),
                           ),
-                          const SizedBox(width: 10),
-                          ButtonBlue(
-                              onPressed: () {},
-                              width: 170,
-                              height: 34,
-                              text: "Message",
-                              color: AppColors.cf7f7f7,
-                              textColor: AppColors.c1c1c1c),
+                          const SizedBox(width: 80),
                         ],
                       ),
                       const SizedBox(height: 24),
@@ -235,44 +223,31 @@ class _ProfilePageState extends State<ProfilePage>
                         ],
                       ),
                       SizedBox(
-                        height: 400,
+                        height: MediaQuery.of(context).size.height,
                         child: TabBarView(
                           controller: _tabController,
                           children: [
-                            Column(
-                              children: List.generate(
-                                3,
-                                (index) => Row(
-                                  children: List.generate(
-                                    3,
-                                    (index) => Expanded(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(3.0),
-                                        child: Image.asset(profileImages[index],
-                                            fit: BoxFit.contain),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Column(
-                              children: List.generate(
-                                3,
-                                (index) => Row(
-                                  children: List.generate(
-                                    3,
-                                    (index) => Expanded(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(3.0),
-                                        child: Image.asset(profileImages[index],
-                                            fit: BoxFit.contain),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
+                            GridView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
+                                gridDelegate:
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 3,
+                                        childAspectRatio: 2,
+                                        crossAxisSpacing: 4,
+                                        mainAxisSpacing: 4),
+                                itemCount: profileImages.length,
+                                itemBuilder: (context, index) {
+                                  return GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => ViewPost(
+                                                    imagePath:
+                                                        profileImages[index])));
+                                      },
+                                      child: Image.asset(profileImages[index]));
+                                })
                           ],
                         ),
                       ),

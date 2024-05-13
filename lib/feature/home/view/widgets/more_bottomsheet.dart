@@ -6,7 +6,7 @@ void moreBottomSheet(BuildContext context) {
     context: context,
     builder: (BuildContext context) {
       return Container(
-          height: 280,
+          height: 220,
           width: MediaQuery.of(context).size.width,
           decoration: const BoxDecoration(
             color: Colors.white,
@@ -56,13 +56,6 @@ void moreBottomSheet(BuildContext context) {
                                   fontWeight: FontWeight.w500)),
                         )
                       ]),
-                  const SizedBox(height: 24),
-                  TextButton(
-                      onPressed: () {},
-                      child: const Text("Qiziqarsiz",
-                          style: TextStyle(
-                              color: AppColors.c1c1c1c,
-                              fontWeight: FontWeight.w500))),
                   const SizedBox(height: 24),
                   TextButton(
                       onPressed: () {},

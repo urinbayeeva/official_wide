@@ -12,7 +12,7 @@ class ReportPage extends StatelessWidget {
         itemCount: reportWords.length,
         itemBuilder: (context, index) {
           return Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
+            padding: const EdgeInsets.only(bottom: 2.0),
             child: SelectableContainer(
               text: reportWords[index],
               index: index,

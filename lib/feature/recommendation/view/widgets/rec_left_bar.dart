@@ -13,7 +13,8 @@ class RecLeftBar extends StatelessWidget {
           Container(
             decoration: const BoxDecoration(
               color: Colors.white,
-              border: Border(top: BorderSide(width: 1, color: Color(0xFFEFEFEF))),
+              border:
+                  Border(top: BorderSide(width: 1, color: Color(0xFFEFEFEF))),
             ),
             child: Column(
               children: [
@@ -24,14 +25,21 @@ class RecLeftBar extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 RotatedWidget(
-                    imagePath: "assets/icons/tab_bar/profile_icon.svg",
-                    onPressed: () => context.goNamed("/profilePage")),
+                  imagePath: "assets/icons/tab_bar/profile_icon.svg",
+                  onPressed: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ProfilePage())),
+                ),
                 const SizedBox(height: 8, width: 200),
                 RotatedWidget(
                     imagePath: "assets/icons/tab_bar/search_icon.svg",
-                    onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const RecPage()))),
+                    onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const RecPage()))),
                 const SizedBox(height: 8),
-                RotatedWidget(imagePath: "assets/icons/home/yellow_home.svg", onPressed: () {})
+                RotatedWidget(
+                    imagePath: "assets/icons/home/yellow_home.svg",
+                    onPressed: () {})
               ],
             ),
           )

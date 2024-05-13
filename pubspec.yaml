@@ -56,6 +56,7 @@ flutter:
     - assets/images/post/
     - assets/images/companies/
     - assets/icons/profile/
+    - assets/icons/tab_bar/plus_icon.svg
     # - assets/icons/home/return.svg
     # - assets/images/home/logo.png
     # - assets/icons/home/home_icon.svg
