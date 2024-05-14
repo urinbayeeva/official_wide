@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:wide/core/screens/all.dart';
 
 class InputTextField extends StatefulWidget {
@@ -35,15 +36,28 @@ class _InputTextFieldState extends State<InputTextField> {
     return SizedBox(
       width: double.infinity,
       height: 48,
-      child: TextField(
+      child: TextFormField(
+        keyboardType: TextInputType.text,
         cursorColor: AppColors.c1a73e8,
         obscureText: widget.showText != null && !widget.showText!,
         controller: widget.controller,
-        onChanged: (text) {
-          setState(() {
-            _showClearButton = text.isNotEmpty;
-          });
-        },
+        inputFormatters: [
+          LengthLimitingTextInputFormatter(28),
+        ],
+        // onChanged: (text) {
+        //   setState(() {
+        //     if (text.length <= 28) {
+        //       _showClearButton = text.isNotEmpty;
+        //     } else {
+        //       widget.controller!.text = text.substring(0, 28);
+
+        //       widget.controller!.selection = TextSelection.collapsed(
+        //           offset: widget.controller!.text.length);
+        //       return;
+        //     }
+        //   });
+        // },
+
         decoration: InputDecoration(
           suffixIcon: _showClearButton
               ? IconButton(
@@ -55,34 +69,21 @@ class _InputTextFieldState extends State<InputTextField> {
                     });
                   },
                 )
-              : widget.showPasswordToggle
-                  ?
-                  // ? IconButton(
-                  //     icon: Icon(
-                  //       _passwordVisible
-                  //           ? Icons.visibility
-                  //           : Icons.visibility_off,
-                  //       color: Colors.grey,
-                  //       size: 20,
-                  //     ),
-                  //     onPressed: () {
-                  //       setState(() {
-                  //         _passwordVisible = !_passwordVisible;
-                  //       });
-                  //     },
-                  //   )
-                  GestureDetector(
+              : (widget.showPasswordToggle &&
+                      !(_passwordVisible && widget.controller!.text.isNotEmpty))
+                  ? GestureDetector(
                       child: Image.asset(
                         _passwordVisible
                             ? "assets/images/eye_open.png"
-                            : "assets/images/eye_closes.png",
+                            : "assets/images/eye_closed.png",
                         scale: 4.5,
                       ),
                       onTap: () {
                         setState(() {
                           _passwordVisible = !_passwordVisible;
                         });
-                      })
+                      },
+                    )
                   : null,
           focusedBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: AppColors.c1a73e8, width: 1.0),

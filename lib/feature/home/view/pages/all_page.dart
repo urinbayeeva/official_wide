@@ -17,8 +17,9 @@ class _AllPageState extends State<AllPage> {
     super.initState();
     _initializeVideoPlayers();
     _pageController = PageController();
-    SystemChrome.setPreferredOrientations(
-        [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft]);
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+    ]);
   }
 
   void _initializeVideoPlayers() {
@@ -133,7 +134,7 @@ class _AllPageState extends State<AllPage> {
                         }
                       }))),
           SizedBox(
-            width: 75,
+            width: 90,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

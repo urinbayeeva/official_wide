@@ -1,3 +1,6 @@
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:wide/core/screens/all.dart';
 import 'package:wide/feature/auth/view/pages/input_textfield.dart';
 
@@ -8,6 +11,8 @@ class InputCode extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
+    bool _showClearButton =
+        false; // You can use this later to control clear button visibility
     TextEditingController codeController = TextEditingController();
     return Scaffold(
       backgroundColor: Colors.white,
@@ -21,10 +26,11 @@ class InputCode extends StatelessWidget {
               textAlign: TextAlign.center,
               text: TextSpan(
                 style: const TextStyle(
-                    color: AppColors.c1c1c1c,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    fontFamily: "Geometria"),
+                  color: AppColors.c1c1c1c,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  fontFamily: "Geometria",
+                ),
                 children: [
                   const TextSpan(
                     text: "39 19 raqamiga sms kod yuborildi kodni \nkiriting",
@@ -37,7 +43,11 @@ class InputCode extends StatelessWidget {
                   TextSpan(
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
-                        context.go("/login");
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginPage()));
+                        ;
                       },
                     text: " sms kod kelmadimi?",
                     style: const TextStyle(
@@ -50,11 +60,34 @@ class InputCode extends StatelessWidget {
               ),
             ),
             SizedBox(height: screenHeight * 0.15),
-            Center(
-              child: InputTextField(
+            SizedBox(
+              width: double.infinity,
+              height: 48,
+              child: TextFormField(
+                keyboardType: TextInputType.text,
+                cursorColor: AppColors.c1a73e8,
                 controller: codeController,
-                name: "Sms kod",
-                showPasswordToggle: false,
+                inputFormatters: [
+                  LengthLimitingTextInputFormatter(6),
+                ],
+                decoration: InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                    borderSide:
+                        const BorderSide(color: AppColors.c1a73e8, width: 1.0),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide:
+                        const BorderSide(color: AppColors.cfcfdf0, width: 1.0),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  border: InputBorder.none,
+                  hintText: "Sms kod",
+                  hintStyle:
+                      const TextStyle(color: Color(0xFFB7B7B7), fontSize: 14),
+                  contentPadding:
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+                ),
               ),
             ),
             const SizedBox(
@@ -78,10 +111,15 @@ class InputCode extends StatelessWidget {
             const Spacer(),
             ButtonBlue(
               width: double.infinity,
-              color: AppColors.c1a73e8,
+              color: codeController.text.isEmpty
+                  ? const Color(0xFFFBCF7A)
+                  : AppColors.c1a73e8,
               height: 53,
               text: "Kirish",
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => LoginPage()));
+              },
             ),
             const SizedBox(
               height: 40,

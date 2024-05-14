@@ -7,6 +7,7 @@ class CameraScreen extends StatefulWidget {
   const CameraScreen({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _CameraScreenState createState() => _CameraScreenState();
 }
 
@@ -19,7 +20,6 @@ class _CameraScreenState extends State<CameraScreen> {
     _pickImage(ImageSource.camera);
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
     ]);
   }
@@ -68,7 +68,8 @@ class _CameraScreenState extends State<CameraScreen> {
         title: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
           child: GestureDetector(
-            onTap: () => const HomePage(),
+            onTap: () => Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const HomePage())),
             child: SvgPicture.asset(
               AppImages.returnIcon,
               width: 22,
@@ -102,21 +103,24 @@ class _CameraScreenState extends State<CameraScreen> {
       ),
       body: Column(
         children: [
-          SizedBox(height: screenHeight * 0.1),
+          SizedBox(height: screenHeight * 0.050),
           Expanded(
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(width: screenWidth * 0.024),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: Image.file(
-                    _imageFile!,
-                    scale: 4,
+                SizedBox(width: screenWidth * 0.016),
+                SizedBox(
+                  width: 250,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: Image.file(
+                      _imageFile!,
+                      scale: 4,
+                    ),
                   ),
                 ),
                 // Empty container if no image is selected
-                SizedBox(width: screenWidth * 0.05),
+                SizedBox(width: screenWidth * 0.02),
                 SizedBox(
                   width: screenWidth * 0.5,
                   height: screenHeight * 0.45,
@@ -208,7 +212,7 @@ class ImageViewScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Image View'),
+        title: const Text('Image View'),
       ),
       body: Center(
         child: Image.file(imageFile!),

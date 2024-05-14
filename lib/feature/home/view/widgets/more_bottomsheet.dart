@@ -49,7 +49,10 @@ void moreBottomSheet(BuildContext context) {
                       children: [
                         SvgPicture.asset("assets/icons/home/report.svg"),
                         TextButton(
-                          onPressed: () => context.goNamed("report"),
+                          onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ReportPage())),
                           child: const Text(" Shikoyat",
                               style: TextStyle(
                                   color: AppColors.c1c1c1c,

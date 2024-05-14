@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
+      DeviceOrientation.landscapeLeft,
     ]);
   }
 

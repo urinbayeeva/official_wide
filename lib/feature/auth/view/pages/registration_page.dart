@@ -1,8 +1,11 @@
 import 'package:wide/core/screens/all.dart';
 import 'package:wide/feature/auth/view/pages/input_textfield.dart';
+import 'package:wide/feature/auth/view_model/register_model.dart';
+import 'package:wide/feature/auth/view_model/register_service.dart';
 
 class RegistrationPage extends StatefulWidget {
-  const RegistrationPage({super.key});
+  final TextEditingController? getPassword;
+  const RegistrationPage({super.key, this.getPassword});
 
   @override
   State<RegistrationPage> createState() => _RegistrationPageState();
@@ -10,12 +13,12 @@ class RegistrationPage extends StatefulWidget {
 
 class _RegistrationPageState extends State<RegistrationPage> {
   TextEditingController nameController = TextEditingController();
-  TextEditingController phoneCodeController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
+
+  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
-    // Get the screen size
     final Size screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -36,20 +39,23 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     text: TextSpan(
                       style: const TextStyle(
                         color: AppColors.c1c1c1c,
-                        fontSize: 14,
+                        fontSize: 16,
                         fontFamily: "Geometria",
-                        fontWeight: FontWeight.w400,
+                        fontWeight: FontWeight.w600,
                       ),
                       children: [
                         const TextSpan(
                             text: "Agar ro'yhatdan o’tgan bo'lsangiz "),
                         TextSpan(
                           recognizer: TapGestureRecognizer()
-                            ..onTap = () => context.go("/login"),
+                            ..onTap = () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const LoginPage())),
                           text: "kirish\n",
                           style: const TextStyle(
                             color: AppColors.c1a73e8,
-                            fontWeight: FontWeight.w400,
+                            fontWeight: FontWeight.w600,
                             fontSize: 16,
                           ),
                         ),
@@ -108,12 +114,37 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           ])),
                   const Spacer(),
                   ButtonBlue(
-                    color: AppColors.c1a73e8,
-                    width: double.infinity,
-                    height: 48,
-                    text: "Keyingisi",
-                    onPressed: () => context.goNamed("inputName"),
-                  ),
+                      color: nameController.text.isNotEmpty &&
+                              phoneNumberController.text.isNotEmpty
+                          ? AppColors.c1a73e8
+                          : const Color(0xFFFBCF7A),
+                      width: double.infinity,
+                      height: 48,
+                      text: "Keyingisi",
+                      onPressed: () async {
+                        if (nameController.text.isNotEmpty &&
+                            phoneNumberController.text.isNotEmpty) {
+                          RegistrationModel regisModel = RegistrationModel(
+                            userName: nameController.text.trim(),
+                            password: "feruza3590",
+                            phone: "{phoneNumberController.text.trim()}",
+                          );
+
+                          debugPrint(
+                              "${regisModel.userName}, ${regisModel.phone}, ${regisModel.password}");
+                          await NetworkService.POST(
+                              NetworkService.apiPostData, regisModel.toJson());
+                          setState(() {});
+                        }
+
+                        if (nameController.text.isNotEmpty &&
+                            phoneNumberController.text.isNotEmpty) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const InputName()));
+                        } else {}
+                      }),
                   const SizedBox(height: 15)
                 ]))));
   }

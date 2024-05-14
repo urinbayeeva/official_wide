@@ -1,13 +1,9 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wide/core/screens/all.dart';
-import 'package:wide/feature/home/view/pages/all_page.dart';
-import 'package:wide/feature/posts/view/pages/add_post.dart';
-import 'core/router/go_router.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const ProviderScope(child: MyApp()));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -30,6 +26,7 @@ class _MyAppState extends State<MyApp> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)))),
         routes: {
+          "/splashPage": (context) => const SplashPage(),
           "/homePage": (context) => const HomePage(),
           "/addPost": (context) => const CameraScreen(),
           "/profilePage": (context) => const ProfilePage(),
@@ -39,7 +36,7 @@ class _MyAppState extends State<MyApp> {
           'settingPage': (context) => const SettingPage(),
           'statistikaPage': (context) => const StatisticPage(),
         },
-        initialRoute: "/homePage",
+        initialRoute: "/splashPage",
       );
     });
   }

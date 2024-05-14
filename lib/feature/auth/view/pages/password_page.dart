@@ -1,4 +1,5 @@
 import 'package:wide/core/screens/all.dart';
+import 'package:wide/feature/auth/view/pages/input_code.dart';
 
 class InputPassword extends StatefulWidget {
   const InputPassword({super.key});
@@ -71,7 +72,10 @@ class _InputPasswordState extends State<InputPassword> {
                   TextSpan(
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
-                        context.go("/login");
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginPage()));
                       },
                     text: "foydalanish bomini kiritish",
                     style: const TextStyle(
@@ -82,66 +86,52 @@ class _InputPasswordState extends State<InputPassword> {
               ),
             ),
             const Spacer(),
-            Center(
-              child: Form(
-                autovalidateMode: AutovalidateMode.always,
-                child: Container(
-                  width: double.infinity,
-                  height: 56,
-                  child: TextFormField(
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.allow(
-                          RegExp("[0-9@a-zA-Z.]")),
-                    ],
-                    validator: validatePassword,
-                    key: passwordKey,
-                    autocorrect: false,
-                    textAlignVertical: TextAlignVertical.center,
-                    obscureText: !passwordVisible,
-                    controller: passwordController,
-                    decoration: InputDecoration(
-                      suffixIcon: passwordVisible
-                          ? IconButton(
-                              icon: SvgPicture.asset(
-                                passwordVisible
-                                    ? "assets/icons/auth/eye_icon.svg"
-                                    : "assets/icons/auth/off_eye_icon.svg",
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  passwordVisible = !passwordVisible;
-                                });
-                              },
-                            )
-                          : null,
-                      border: InputBorder.none,
-                      hintText: "Parolingiz",
-                      hintStyle: const TextStyle(
-                        color: Color(0xFFB7B7B7),
-                        fontSize: 16,
-                      ),
-                      errorBorder: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(30)),
-                        borderSide: BorderSide(
-                          color: Colors.red,
-                          width: 1.5,
+            TextFormField(
+              inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter.allow(RegExp("[0-9@a-zA-Z.]")),
+              ],
+              textAlignVertical: TextAlignVertical.center,
+              obscureText: !passwordVisible,
+              controller: passwordController,
+              decoration: InputDecoration(
+                suffixIcon: passwordVisible
+                    ? IconButton(
+                        icon: SvgPicture.asset(
+                          passwordVisible
+                              ? "assets/icons/auth/eye_icon.svg"
+                              : "assets/icons/auth/off_eye_icon.svg",
                         ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                            color: AppColors.c1a73e8, width: 1.0),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                            color: AppColors.cfcfdf0, width: 1.0),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      contentPadding:
-                          const EdgeInsets.symmetric(horizontal: 16),
-                    ),
+                        onPressed: () {
+                          setState(() {
+                            passwordVisible = !passwordVisible;
+                          });
+                        },
+                      )
+                    : null,
+                border: InputBorder.none,
+                hintText: "Parolingiz",
+                hintStyle: const TextStyle(
+                  color: Color(0xFFB7B7B7),
+                  fontSize: 16,
+                ),
+                errorBorder: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(30)),
+                  borderSide: BorderSide(
+                    color: Colors.red,
+                    width: 1.5,
                   ),
                 ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide:
+                      const BorderSide(color: AppColors.c1a73e8, width: 1.0),
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide:
+                      const BorderSide(color: AppColors.cfcfdf0, width: 1.0),
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 16),
               ),
             ),
             const Spacer(),
@@ -157,7 +147,8 @@ class _InputPasswordState extends State<InputPassword> {
               height: 48,
               text: "Keyingisi",
               onPressed: () {
-                context.go("/inputSms");
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => InputCode()));
               },
             ),
             const SizedBox(height: 20),

@@ -2,7 +2,6 @@ export 'package:flutter/gestures.dart';
 export 'package:flutter/material.dart';
 export 'package:flutter_svg/flutter_svg.dart';
 export 'package:flutter_svg/svg.dart';
-export 'package:go_router/go_router.dart';
 export 'package:wide/core/style/colors.dart';
 export 'package:wide/core/style/images.dart';
 export 'package:wide/feature/auth/view/pages/all_number_text.dart';
@@ -42,7 +41,6 @@ export '../../feature/auth/view/pages/password_page.dart';
 export '../../feature/home/view/pages/home_page.dart';
 export '../../feature/home/view/pages/report_page.dart';
 export 'package:wide/feature/profile/view/pages/admin_page.dart';
-
 export 'package:wide/feature/profile/view/pages/notification_page.dart';
 export 'package:wide/feature/profile/view/pages/user_info.dart';
 export 'package:wide/core/screens/all.dart';

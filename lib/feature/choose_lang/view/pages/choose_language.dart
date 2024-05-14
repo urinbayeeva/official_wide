@@ -103,12 +103,15 @@ class _ChooseLanguageState extends State<ChooseLanguage> {
                                   color: AppColors.c1a73e8,
                                   text: "Kirish",
                                   onPressed: () {
-                                    context.go("/login");
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => LoginPage()));
                                   },
                                 ),
-                                _buttonVisible
-                                    ? const SizedBox(height: 10)
-                                    : const SizedBox.shrink()
+                                // _buttonVisible
+                                //     ? const SizedBox(height: 10)
+                                //     : const SizedBox.shrink()
                               ])))
                     ]))));
   }

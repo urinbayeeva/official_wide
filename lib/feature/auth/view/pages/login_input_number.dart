@@ -36,7 +36,9 @@ class LoginInputNumber extends StatelessWidget {
             Row(mainAxisAlignment: MainAxisAlignment.end, children: [
               GestureDetector(
                   onTap: () {
-                    context.go("/login");
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => LoginPage()));
+                    ;
                   },
                   child: const Text("Parolni qayta kiritish",
                       style: TextStyle(
@@ -55,7 +57,8 @@ class LoginInputNumber extends StatelessWidget {
                 height: 48,
                 text: "Kirish",
                 onPressed: () {
-                  context.go("/inputSms");
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => LoginInputSms()));
                 }),
             const SizedBox(height: 20),
           ],

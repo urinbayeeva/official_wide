@@ -56,7 +56,8 @@ class InputName extends StatelessWidget {
               height: 48,
               text: "Keyingisi",
               onPressed: () {
-                context.go("/inputPass");
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => InputPassword()));
               },
             ),
             const SizedBox(height: 20),

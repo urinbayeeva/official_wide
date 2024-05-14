@@ -7,7 +7,8 @@ class RoyhatdanOtishWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () => context.go("/registration"),
+        onTap: () => Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const RegistrationPage())),
         child: Text(text!,
             style: const TextStyle(
                 color: AppColors.c1a73e8,
