@@ -1,6 +1,7 @@
 import 'package:wide/core/screens/all.dart';
 import 'package:wide/feature/custom_appbar.dart';
 import 'package:wide/feature/profile/view/pages/language_page.dart';
+import 'package:wide/feature/profile/view/pages/pullik_akkaunt.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({super.key});
@@ -35,42 +36,51 @@ class _SettingPageState extends State<SettingPage> {
               ),
               showSearchIcon: false),
         ),
-        body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Column(children: [
-              _buildSettingItem(
-                  "assets/icons/auth/lang_icon.svg",
-                  "Til",
-                  () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const LanguagePage()))),
-              _buildSettingItem(
-                  "assets/icons/profile/bell.svg",
-                  "Bildirishnomalar",
-                  () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const NotificationPage()))),
-              _buildSettingItem(
-                  "assets/icons/profile/user.svg",
-                  "Foydalanuvchi ma'lumotlari",
-                  () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const UserInfo()))),
-              _buildSettingItem(
-                  "assets/icons/profile/info.svg",
-                  "Admin",
-                  () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const AdminPage()))),
-              _buildSettingItem("assets/icons/profile/log_out.svg", "Chiqish",
-                  () {
-                _showLogoutDialog();
-              })
-            ])));
+        body: SingleChildScrollView(
+          child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Column(children: [
+                _buildSettingItem(
+                    "assets/icons/auth/lang_icon.svg",
+                    "Til",
+                    () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LanguagePage()))),
+                _buildSettingItem(
+                    "assets/icons/home/premium_service.svg",
+                    "Akkauntni pullik qilish",
+                    () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const PullikAkkaunt()))),
+                _buildSettingItem(
+                    "assets/icons/profile/bell.svg",
+                    "Bildirishnomalar",
+                    () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const NotificationPage()))),
+                _buildSettingItem(
+                    "assets/icons/profile/user.svg",
+                    "Foydalanuvchi ma'lumotlari",
+                    () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const UserInfo()))),
+                _buildSettingItem(
+                    "assets/icons/profile/info.svg",
+                    "Admin",
+                    () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AdminPage()))),
+                _buildSettingItem("assets/icons/profile/log_out.svg", "Chiqish",
+                    () {
+                  _showLogoutDialog();
+                })
+              ])),
+        ));
   }
 
   Widget _buildSettingItem(String iconPath, String title, VoidCallback onTap) {
@@ -79,23 +89,32 @@ class _SettingPageState extends State<SettingPage> {
         child: MouseRegion(
             cursor: SystemMouseCursors.click,
             child: Container(
-                decoration: const BoxDecoration(
-                    border: Border(
-                        bottom:
-                            BorderSide(width: 1, color: AppColors.cefefef))),
-                child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Row(children: [
-                      SvgPicture.asset(iconPath, width: 60, height: 24),
-                      const SizedBox(width: 16),
-                      Text(
-                        title,
-                        style: const TextStyle(
-                            color: AppColors.c1c1c1c,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold),
-                      )
-                    ])))));
+              decoration: const BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(width: 1, color: AppColors.cefefef))),
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        SvgPicture.asset(iconPath, width: 60, height: 24),
+                        const SizedBox(width: 16),
+                        Text(
+                          title,
+                          style: const TextStyle(
+                              color: AppColors.c1c1c1c,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    SvgPicture.asset("assets/icons/home/open_button.svg")
+                  ],
+                ),
+              ),
+            )));
   }
 
   Widget _buildTitle() {

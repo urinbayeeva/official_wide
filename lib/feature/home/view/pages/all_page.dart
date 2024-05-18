@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:vibration/vibration.dart';
 import 'package:wide/core/screens/all.dart';
 
 class AllPage extends StatefulWidget {
@@ -47,10 +49,8 @@ class _AllPageState extends State<AllPage> {
   }
 
   List<dynamic> contentList = [
-    "assets/images/mine.mp4",
-    "assets/videos/domla.mp4",
+    "assets/videos/abdukarim.mp4",
     "assets/videos/nature.mp4",
-    "assets/images/mine.MP4",
     "assets/images/mem.jpg",
     "assets/images/i.png",
     "assets/images/i.png",
@@ -134,7 +134,7 @@ class _AllPageState extends State<AllPage> {
                         }
                       }))),
           SizedBox(
-            width: 90,
+            width: 80,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -214,6 +214,17 @@ class _AllPageState extends State<AllPage> {
             fit: StackFit.loose,
             children: [
               GestureDetector(
+                onDoubleTap: () {
+                  setState(() {
+                    isLiked = !isLiked;
+                    if (isLiked) {
+                      likeCount++;
+                    } else {
+                      likeCount--;
+                    }
+                    Vibration.vibrate(duration: 50);
+                  });
+                },
                 onTap: () {
                   setState(() {
                     if (_videoControllers[index].value.isPlaying) {
@@ -229,7 +240,7 @@ class _AllPageState extends State<AllPage> {
                     child: VideoPlayer(_videoControllers[index])),
               ),
               Positioned(
-                top: 12,
+                top: 14,
                 right: 4,
                 child: Container(
                   decoration: BoxDecoration(
@@ -255,7 +266,7 @@ class _AllPageState extends State<AllPage> {
               ),
 
               Positioned(
-                bottom: 8,
+                bottom: 0,
                 left: 0,
                 right: 0,
                 child: Container(
@@ -347,7 +358,47 @@ class _AllPageState extends State<AllPage> {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 10),
+                        SizedBox(
+                          height: 14,
+                          width: double.infinity,
+                          child: ValueListenableBuilder<VideoPlayerValue>(
+                            valueListenable: _videoControllers[index],
+                            builder: (context, value, _) {
+                              return SliderTheme(
+                                data: SliderTheme.of(context).copyWith(
+                                  trackHeight: 1.0,
+                                  thumbShape: SliderComponentShape.noThumb,
+                                  overlayShape: SliderComponentShape.noThumb,
+                                  activeTrackColor: AppColors.c1a73e8,
+                                  inactiveTrackColor: Colors.white,
+                                  trackShape:
+                                      const RoundedRectSliderTrackShape(), // Ensure this is set to remove any border around the track
+                                ),
+                                child: Slider(
+                                  value: value.position.inSeconds.toDouble(),
+                                  onChanged: (double value) {
+                                    if (!_videoControllers[index]
+                                        .value
+                                        .isPlaying) {
+                                      _videoControllers[index].play();
+                                    }
+                                    _videoControllers[index].seekTo(
+                                        Duration(seconds: value.toInt()));
+                                  },
+                                  onChangeEnd: (double value) {
+                                    if (!_videoControllers[index]
+                                        .value
+                                        .isPlaying) {
+                                      _videoControllers[index].pause();
+                                    }
+                                  },
+                                  min: 0.0,
+                                  max: value.duration.inSeconds.toDouble(),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
                         GestureDetector(
                           onTap: () {
                             setState(() {
@@ -400,28 +451,7 @@ class _AllPageState extends State<AllPage> {
                             ),
                           ),
                         )
-                      : SizedBox.shrink(),
-                ),
-              ),
-              // Progress indicator
-              Positioned(
-                left: 20,
-                right: 16,
-                bottom: 8,
-                child: ValueListenableBuilder<VideoPlayerValue>(
-                  valueListenable: _videoControllers[index],
-                  builder: (context, value, _) {
-                    final progress = value.position.inMilliseconds /
-                        value.duration.inMilliseconds;
-                    return LinearProgressIndicator(
-                      minHeight: 1,
-                      value: progress.isNaN ? 0.0 : progress,
-                      backgroundColor: Colors.white,
-                      valueColor: const AlwaysStoppedAnimation<Color>(
-                        AppColors.c1a73e8,
-                      ), // Adjust color as needed
-                    );
-                  },
+                      : const SizedBox.shrink(),
                 ),
               ),
             ],
@@ -437,9 +467,22 @@ class _AllPageState extends State<AllPage> {
     return Stack(
       fit: StackFit.expand,
       children: [
-        Image.asset(
-          imageUrl,
-          fit: BoxFit.contain,
+        GestureDetector(
+          onDoubleTap: () {
+            setState(() {
+              isLiked = !isLiked;
+              if (isLiked) {
+                likeCount++;
+              } else {
+                likeCount--;
+              }
+              Vibration.vibrate(duration: 100, amplitude: 200);
+            });
+          },
+          child: Image.asset(
+            imageUrl,
+            fit: BoxFit.contain,
+          ),
         ),
         Positioned(
           top: 12,
@@ -467,7 +510,7 @@ class _AllPageState extends State<AllPage> {
           ),
         ),
         Positioned(
-          bottom: 8,
+          bottom: 0,
           left: 0,
           right: 0,
           child: Container(

@@ -5,7 +5,6 @@ class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _LoginPageState createState() => _LoginPageState();
 }
 
@@ -31,9 +30,9 @@ class _LoginPageState extends State<LoginPage> {
         padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
         child: Column(
           children: [
-            Spacer(),
+            const Spacer(),
             SvgPicture.asset(AppImages.authLogo),
-            Spacer(),
+            const Spacer(),
             Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
               InputTextField(
                   name: "User Ismingiz yoki telefon raqam",
@@ -49,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
                   onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => LoginInputNumber())),
+                          builder: (context) => const LoginInputNumber())),
                   child: const Text("Parolni unutdingizmi ?",
                       style: TextStyle(color: AppColors.c1a73e8, fontSize: 14)))
             ]),
@@ -67,7 +66,9 @@ class _LoginPageState extends State<LoginPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const HomePage()));
+                          builder: (context) => const HomePage(
+                                currentIndex: 3,
+                              )));
                 }),
             const SizedBox(height: 20),
           ],

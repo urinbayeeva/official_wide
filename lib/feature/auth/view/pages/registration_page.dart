@@ -14,6 +14,7 @@ class RegistrationPage extends StatefulWidget {
 class _RegistrationPageState extends State<RegistrationPage> {
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   bool _isLoading = false;
 
@@ -22,7 +23,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
     final Size screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
-        resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: true,
         backgroundColor: Colors.white,
         body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18.0),
@@ -63,9 +64,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       ],
                     ),
                   ),
-                  SizedBox(
-                      height: screenSize.height *
-                          0.04), // Adjusted height based on screen size
+                  const Spacer(),
                   InputTextField(
                     controller: nameController,
                     name: "Ismingiz",
@@ -75,8 +74,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      NumberTextField(),
-                      SizedBox(width: screenSize.width * 0.02),
+                      // NumberTextField(),
+                      // SizedBox(width: screenSize.width * 0.02),
                       Expanded(
                         flex: 3,
                         child: AllNumberTextField(
@@ -85,33 +84,34 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       ),
                     ],
                   ),
-                  SizedBox(
-                      height: screenSize.height *
-                          0.04), // Adjusted height based on screen size
-                  const DividerWidget(),
-                  SizedBox(
-                      height: screenSize.height *
-                          0.04), // Adjusted height based on screen size
-                  customElevatedButton(
-                      onPressed: () {},
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SvgPicture.asset(
-                              AppImages.googleIcon,
-                              width: 20,
-                              height: 20,
-                            ),
-                            SizedBox(
-                                width: screenSize.width *
-                                    0.01), // Adjusted width based on screen size
-                            const Text(
-                                "Google akkaunt orqali ro'yhatdan o'tish",
-                                style: TextStyle(
-                                    color: AppColors.c1c1c1c,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 14))
-                          ])),
+                  SizedBox(height: screenSize.height * 0.02),
+                  InputTextField(
+                    controller: passwordController,
+                    name: "Parolingiz",
+                    showPasswordToggle: true,
+                  ),
+                  // SizedBox(height: screenSize.height * 0.04),
+                  // const DividerWidget(),
+                  // SizedBox(height: screenSize.height * 0.04),
+                  // customElevatedButton(
+                  //     onPressed: () {},
+                  //     child: Row(
+                  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //         children: [
+                  //           SvgPicture.asset(
+                  //             AppImages.googleIcon,
+                  //             width: 20,
+                  //             height: 20,
+                  //           ),
+                  //           SizedBox(width: screenSize.width * 0.01),
+                  //           const Text(
+                  //               "Google akkaunt orqali ro'yhatdan o'tish",
+                  //               style: TextStyle(
+                  //                   color: AppColors.c1c1c1c,
+                  //                   fontWeight: FontWeight.w500,
+                  //                   fontSize: 14))
+                  //         ])),
+                  const Spacer(),
                   const Spacer(),
                   ButtonBlue(
                       color: nameController.text.isNotEmpty &&
@@ -126,8 +126,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             phoneNumberController.text.isNotEmpty) {
                           RegistrationModel regisModel = RegistrationModel(
                             userName: nameController.text.trim(),
-                            password: "feruza3590",
-                            phone: "{phoneNumberController.text.trim()}",
+                            password: passwordController.text.trim(),
+                            phone: phoneNumberController.text.trim(),
                           );
 
                           debugPrint(
@@ -145,7 +145,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                   builder: (context) => const InputName()));
                         } else {}
                       }),
-                  const SizedBox(height: 15)
+                  const SizedBox(height: 30)
                 ]))));
   }
 }

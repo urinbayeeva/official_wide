@@ -27,14 +27,16 @@ class _MyAppState extends State<MyApp> {
                     borderRadius: BorderRadius.circular(20)))),
         routes: {
           "/splashPage": (context) => const SplashPage(),
-          "/homePage": (context) => const HomePage(),
+          "/homePage": (context) => const HomePage(
+                currentIndex: 3,
+              ),
           "/addPost": (context) => const CameraScreen(),
           "/profilePage": (context) => const ProfilePage(),
           "/searchPage": (context) => const RecPage(),
           "/allPage": (context) => const AllPage(),
-          'savedPage': (context) => const SavedPage(),
-          'settingPage': (context) => const SettingPage(),
-          'statistikaPage': (context) => const StatisticPage(),
+          '/savedPage': (context) => const SavedPage(),
+          '/settingPage': (context) => const SettingPage(),
+          '/statistikaPage': (context) => const StatisticPage(),
         },
         initialRoute: "/splashPage",
       );

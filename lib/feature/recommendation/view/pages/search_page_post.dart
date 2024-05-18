@@ -1,14 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wide/core/screens/all.dart';
-import 'package:wide/feature/home/view/widgets/images_listed.dart';
 import 'package:wide/feature/recommendation/view/widgets/search_model.dart';
 
 class SearchPage extends StatefulWidget {
-  const SearchPage({Key? key}) : super(key: key);
+  const SearchPage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _SearchPageState createState() => _SearchPageState();
 }
 
@@ -90,47 +87,38 @@ class _SearchPageState extends State<SearchPage> {
               ),
               const SizedBox(height: 20),
               Expanded(
-                child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    childAspectRatio: 3.0,
-                    crossAxisCount: 3,
-                    crossAxisSpacing: 16,
-                  ),
-                  itemCount: users.length,
-                  itemBuilder: (context, index) {
-                    final user = users[index];
-                    return ListTile(
-                      isThreeLine: true,
-                      trailing: SvgPicture.asset("assets/icons/clear.svg",
-                          width: 22, height: 22),
-                      leading: Image.asset(user.imagePath!),
-                      title: Text(
-                        user.userName!,
-                        style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: Color(0xFF1C1C1C),
-                        ),
-                      ),
-                      subtitle: Text(
-                        user.subtitle!,
-                        style: const TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                          color: Color(0xFF707071),
-                        ),
-                      ),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const ProfilePage()),
-                        );
-                      },
-                    );
-                  },
-                ),
-              )
+                  child: GridView.builder(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              childAspectRatio: 3.0,
+                              crossAxisCount: 3,
+                              crossAxisSpacing: 16),
+                      itemCount: users.length,
+                      itemBuilder: (context, index) {
+                        final user = users[index];
+                        return ListTile(
+                            isThreeLine: true,
+                            trailing: SvgPicture.asset("assets/icons/clear.svg",
+                                width: 22, height: 22),
+                            leading: Image.asset(user.imagePath!),
+                            title: Text(user.userName!,
+                                style: const TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    color: Color(0xFF1C1C1C))),
+                            subtitle: Text(user.subtitle!,
+                                style: const TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w400,
+                                    color: Color(0xFF707071))),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const HomePage(currentIndex: 1)));
+                            });
+                      }))
             ],
           ),
         ),

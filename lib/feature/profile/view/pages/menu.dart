@@ -33,17 +33,17 @@ class _MenuPageState extends State<MenuPage> {
             child: ListView(children: [
               _buildSettingItem(
                   "assets/icons/profile/saved.svg", "Saqlanganlar", () {
-                Navigator.pushNamed(context, "savedPage");
+                Navigator.pushNamed(context, "/savedPage");
               }),
               _buildSettingItem(
                   "assets/icons/profile/settings.svg", "Sozlamalar", () {
-                Navigator.pushNamed(context, "settingPage");
+                Navigator.pushNamed(context, "/settingPage");
               }),
               _buildSettingItem(
                   "assets/icons/profile/payment.svg", "To'lov", () {}),
               _buildSettingItem(
                   "assets/icons/profile/statistic.svg", "Statistika", () {
-                Navigator.pushNamed(context, "statistikaPage");
+                Navigator.pushNamed(context, "/statistikaPage");
               }),
             ])));
   }

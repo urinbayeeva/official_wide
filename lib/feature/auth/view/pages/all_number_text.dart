@@ -19,12 +19,8 @@ class _AllNumberTextFieldState extends State<AllNumberTextField> {
       height: 48,
       child: TextField(
         cursorColor: AppColors.c1a73e8,
-        inputFormatters: [
-          FilteringTextInputFormatter.digitsOnly,
-          _PhoneNumberFormatter(),
-          LengthLimitingTextInputFormatter(12),
-        ],
-        keyboardType: TextInputType.number,
+        inputFormatters: [],
+        keyboardType: TextInputType.numberWithOptions(),
         controller: widget.controller,
         decoration: InputDecoration(
           focusedBorder: OutlineInputBorder(
@@ -36,7 +32,7 @@ class _AllNumberTextFieldState extends State<AllNumberTextField> {
             borderRadius: BorderRadius.circular(8.0),
           ),
           border: InputBorder.none,
-          hintText: "90 000 00 00",
+          hintText: "+998 90 000 00 00",
           hintStyle: const TextStyle(
             color: Color(0xFFB7B7B7),
             fontSize: 15,

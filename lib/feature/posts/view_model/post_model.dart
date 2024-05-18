@@ -1,6 +1,10 @@
+import 'dart:io';
+
 class PostModel {
   final String text;
-  final String imagePath;
+  final File imagePath;
+  final String username;
 
-  PostModel({required this.text, required this.imagePath});
+  PostModel(
+      {required this.text, required this.imagePath, required this.username});
 }
