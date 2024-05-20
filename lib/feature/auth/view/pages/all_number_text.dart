@@ -19,8 +19,8 @@ class _AllNumberTextFieldState extends State<AllNumberTextField> {
       height: 48,
       child: TextField(
         cursorColor: AppColors.c1a73e8,
-        inputFormatters: [],
-        keyboardType: TextInputType.numberWithOptions(),
+        // inputFormatters: [],
+        // keyboardType: TextInputType.numberWithOptions(),
         controller: widget.controller,
         decoration: InputDecoration(
           focusedBorder: OutlineInputBorder(

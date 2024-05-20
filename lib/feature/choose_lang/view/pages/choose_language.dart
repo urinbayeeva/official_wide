@@ -72,6 +72,7 @@ class _ChooseLanguageState extends State<ChooseLanguage> {
                                       hoverColor:
                                           AppColors.c1c1c1c.withOpacity(0.8),
                                       fillColor:
+                                          // ignore: deprecated_member_use
                                           MaterialStateProperty.all<Color>(
                                               AppColors.c1a73e8),
                                       groupValue: _language,

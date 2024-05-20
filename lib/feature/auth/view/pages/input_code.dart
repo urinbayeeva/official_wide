@@ -110,20 +110,18 @@ class InputCode extends StatelessWidget {
             ),
             const Spacer(),
             ButtonBlue(
+              color: codeController.text.isNotEmpty
+                  ? AppColors.c1a73e8
+                  : const Color(0xFFFBCF7A),
               width: double.infinity,
-              color: codeController.text.isEmpty
-                  ? const Color(0xFFFBCF7A)
-                  : AppColors.c1a73e8,
-              height: 53,
-              text: "Kirish",
+              height: 48,
+              text: "Keyingisi",
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => LoginPage()));
+                    MaterialPageRoute(builder: (context) => const InputCode()));
               },
             ),
-            const SizedBox(
-              height: 40,
-            ),
+            const SizedBox(height: 20),
           ],
         ),
       ),

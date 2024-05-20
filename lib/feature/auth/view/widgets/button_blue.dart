@@ -9,14 +9,14 @@ class ButtonBlue extends StatelessWidget {
   final Color? textColor;
 
   const ButtonBlue({
-    Key? key,
+    super.key,
     this.width,
     this.height,
     this.text,
     this.onPressed,
     this.color,
     this.textColor,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +25,13 @@ class ButtonBlue extends StatelessWidget {
       height: height ?? 48,
       child: ElevatedButton(
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(color ?? Colors.blue),
-          shape: MaterialStateProperty.all(
+          backgroundColor: WidgetStateProperty.all(color ?? Colors.blue),
+          shape: WidgetStateProperty.all(
             RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(12),
             ),
           ),
-          elevation: MaterialStateProperty.all(0),
+          elevation: WidgetStateProperty.all(0),
         ),
         onPressed: onPressed ?? () {},
         child: Text(

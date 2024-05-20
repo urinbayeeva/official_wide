@@ -12,18 +12,24 @@ class RegistrationPage extends StatefulWidget {
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {
+  late List<RegistrationModel> userModel;
+
+  Future<void> getUseraName() async {
+    String result = await NetworkService.GET(NetworkService.apiGetData);
+    userModel = registrationModelFromJson(result) as List<RegistrationModel>;
+    setState(() {});
+  }
+
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
-  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
-        resizeToAvoidBottomInset: true,
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18.0),
@@ -33,17 +39,17 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                   const Spacer(),
+                  const Spacer(),
                   SvgPicture.asset(AppImages.authLogo),
                   SizedBox(height: screenSize.height * 0.1),
                   RichText(
                     textAlign: TextAlign.center,
                     text: TextSpan(
                       style: const TextStyle(
-                        color: AppColors.c1c1c1c,
-                        fontSize: 16,
-                        fontFamily: "Geometria",
-                        fontWeight: FontWeight.w600,
-                      ),
+                          color: AppColors.c1c1c1c,
+                          fontSize: 16,
+                          fontFamily: "Geometria",
+                          fontWeight: FontWeight.w600),
                       children: [
                         const TextSpan(
                             text: "Agar ro'yhatdan o’tgan bo'lsangiz "),
@@ -84,33 +90,27 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       ),
                     ],
                   ),
-                  SizedBox(height: screenSize.height * 0.02),
-                  InputTextField(
-                    controller: passwordController,
-                    name: "Parolingiz",
-                    showPasswordToggle: true,
-                  ),
-                  // SizedBox(height: screenSize.height * 0.04),
-                  // const DividerWidget(),
-                  // SizedBox(height: screenSize.height * 0.04),
-                  // customElevatedButton(
-                  //     onPressed: () {},
-                  //     child: Row(
-                  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //         children: [
-                  //           SvgPicture.asset(
-                  //             AppImages.googleIcon,
-                  //             width: 20,
-                  //             height: 20,
-                  //           ),
-                  //           SizedBox(width: screenSize.width * 0.01),
-                  //           const Text(
-                  //               "Google akkaunt orqali ro'yhatdan o'tish",
-                  //               style: TextStyle(
-                  //                   color: AppColors.c1c1c1c,
-                  //                   fontWeight: FontWeight.w500,
-                  //                   fontSize: 14))
-                  //         ])),
+                  SizedBox(height: screenSize.height * 0.04),
+                  const DividerWidget(),
+                  SizedBox(height: screenSize.height * 0.04),
+                  customElevatedButton(
+                      onPressed: () {},
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SvgPicture.asset(
+                              AppImages.googleIcon,
+                              width: 20,
+                              height: 20,
+                            ),
+                            SizedBox(width: screenSize.width * 0.01),
+                            const Text(
+                                "Google akkaunt orqali ro'yhatdan o'tish",
+                                style: TextStyle(
+                                    color: AppColors.c1c1c1c,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14))
+                          ])),
                   const Spacer(),
                   const Spacer(),
                   ButtonBlue(
@@ -126,23 +126,28 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             phoneNumberController.text.isNotEmpty) {
                           RegistrationModel regisModel = RegistrationModel(
                             userName: nameController.text.trim(),
-                            password: passwordController.text.trim(),
                             phone: phoneNumberController.text.trim(),
                           );
 
                           debugPrint(
-                              "${regisModel.userName}, ${regisModel.phone}, ${regisModel.password}");
-                          await NetworkService.POST(
-                              NetworkService.apiPostData, regisModel.toJson());
-                          setState(() {});
-                        }
-
-                        if (nameController.text.isNotEmpty &&
-                            phoneNumberController.text.isNotEmpty) {
-                          Navigator.push(
+                              "${regisModel.userName}, ${regisModel.phone}");
+                          bool userExists =
+                              await NetworkService.checkUserExists(
+                                  nameController.text.trim());
+                          if (userExists) {
+                            // ignore: use_build_context_synchronously
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              content: Text('User already exists!'),
+                            ));
+                          } else {
+                            Navigator.push(
+                              // ignore: use_build_context_synchronously
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const InputName()));
+                                  builder: (context) => const InputPassword()),
+                            );
+                          }
                         } else {}
                       }),
                   const SizedBox(height: 30)

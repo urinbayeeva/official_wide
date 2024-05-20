@@ -1,4 +1,5 @@
 import 'package:wide/core/screens/all.dart';
+import 'package:wide/data/entity/auth_model/registration_model.dart';
 import 'package:wide/feature/auth/view/pages/input_code.dart';
 
 class InputPassword extends StatefulWidget {
@@ -12,6 +13,7 @@ class _InputPasswordState extends State<InputPassword> {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
+    late RegistrationModel model;
 
     TextEditingController passwordController = TextEditingController();
     bool passwordVisible = true;
@@ -100,6 +102,8 @@ class _InputPasswordState extends State<InputPassword> {
                           passwordVisible
                               ? "assets/icons/auth/eye_icon.svg"
                               : "assets/icons/auth/off_eye_icon.svg",
+                          width: 22,
+                          height: 22,
                         ),
                         onPressed: () {
                           setState(() {
@@ -112,7 +116,7 @@ class _InputPasswordState extends State<InputPassword> {
                 hintText: "Parolingiz",
                 hintStyle: const TextStyle(
                   color: Color(0xFFB7B7B7),
-                  fontSize: 16,
+                  fontSize: 14,
                 ),
                 errorBorder: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(30)),
@@ -134,21 +138,64 @@ class _InputPasswordState extends State<InputPassword> {
                 contentPadding: const EdgeInsets.symmetric(horizontal: 16),
               ),
             ),
+            const SizedBox(height: 18),
+            TextFormField(
+              inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter.allow(RegExp("[0-9@a-zA-Z.]")),
+              ],
+              textAlignVertical: TextAlignVertical.center,
+              obscureText: !passwordVisible,
+              controller: passwordController,
+              decoration: InputDecoration(
+                suffixIcon: passwordVisible
+                    ? IconButton(
+                        icon: SvgPicture.asset(
+                            passwordVisible
+                                ? "assets/icons/auth/eye_icon.svg"
+                                : "assets/icons/auth/off_eye_icon.svg",
+                            width: 22,
+                            height: 22),
+                        onPressed: () {
+                          setState(() {
+                            passwordVisible = !passwordVisible;
+                          });
+                        })
+                    : null,
+                border: InputBorder.none,
+                hintText: "Parolingizni tasdiqlang",
+                hintStyle:
+                    const TextStyle(color: Color(0xFFB7B7B7), fontSize: 14),
+                errorBorder: const OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(30)),
+                    borderSide: BorderSide(color: Colors.red, width: 1.5)),
+                focusedBorder: OutlineInputBorder(
+                  borderSide:
+                      const BorderSide(color: AppColors.c1a73e8, width: 1.0),
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide:
+                      const BorderSide(color: AppColors.cfcfdf0, width: 1.0),
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+              ),
+            ),
             const Spacer(),
             const RoyhatdanOtishWidget(
               text: "Kirish",
             ),
             SizedBox(height: screenHeight * 0.03),
             ButtonBlue(
-              width: double.infinity,
               color: passwordController.text.isNotEmpty
                   ? AppColors.c1a73e8
-                  : AppColors.c1a73e8,
+                  : const Color(0xFFFBCF7A),
+              width: double.infinity,
               height: 48,
               text: "Keyingisi",
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => InputCode()));
+                    MaterialPageRoute(builder: (context) => const InputCode()));
               },
             ),
             const SizedBox(height: 20),

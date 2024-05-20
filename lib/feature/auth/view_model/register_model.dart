@@ -1,6 +1,5 @@
 // To parse this JSON data, do
 //
-//     final registrationModel = registrationModelFromJson(jsonString);
 
 import 'dart:convert';
 
@@ -12,12 +11,12 @@ String registrationModelToJson(RegistrationModel data) =>
 
 class RegistrationModel {
   final String userName;
-  final String password;
+  final String? password;
   final String phone;
 
   RegistrationModel({
     required this.userName,
-    required this.password,
+    this.password,
     required this.phone,
   });
 
