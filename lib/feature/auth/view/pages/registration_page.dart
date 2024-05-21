@@ -15,7 +15,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   late List<RegistrationModel> userModel;
 
   Future<void> getUseraName() async {
-    String result = await NetworkService.GET(NetworkService.apiGetData);
+    String result = await NetworkService.GET(NetworkService.checkUser);
     userModel = registrationModelFromJson(result) as List<RegistrationModel>;
     setState(() {});
   }

@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'package:http/http.dart';
 
 class NetworkService {
-  static const String baseUrl = "http://95.47.238.47:5000/api-client/Login";
-  static const String apiPostData = "/Registration";
-  static const String apiGetData = "/CheckUser";
+  static const String baseUrl = "http://95.47.238.47:5000/api-client";
+  static const String apiPostData = "/Login/Registration";
+  static const String checkUser = "/Login/CheckUser";
 
   static Map<String, String> headers = {
     "Content-Type": "application/json",
@@ -55,17 +55,18 @@ class NetworkService {
 
   static Future<bool> checkUserExists(String username) async {
     try {
-      Uri url = Uri.parse(baseUrl + apiGetData);
+      Uri url = Uri.parse("$baseUrl$checkUser?userName=$username");
       Response response = await get(url, headers: headers);
       if (response.statusCode == 200) {
-        List<dynamic> users = jsonDecode(response.body);
+        print("response.body ${response.body}");
+        List<dynamic> users = jsonDecode(response.body)['result'];
         // Check if the username exists in the list of users
         bool userExists = users.contains(username);
         return userExists;
       } else {
+        return false;
         // Throw an exception with a specific error message
-        throw Exception(
-            'Failed to fetch user data. Status code: ${response.statusCode}');
+        // throw Exception('Failed to fetch user data. Status code: ${response.statusCode}');
       }
     } catch (e) {
       // Log the error and return false to indicate failure
