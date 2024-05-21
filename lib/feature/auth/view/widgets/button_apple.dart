@@ -7,19 +7,18 @@ Widget customElevatedButton({
   return ElevatedButton(
     onPressed: onPressed,
     style: ButtonStyle(
-      fixedSize:
-          MaterialStateProperty.all<Size>(const Size(double.infinity, 50)),
-      shape: MaterialStateProperty.all<OutlinedBorder>(
+      fixedSize: WidgetStateProperty.all<Size>(const Size(double.infinity, 50)),
+      shape: WidgetStateProperty.all<OutlinedBorder>(
         RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
           side: const BorderSide(color: Color(0xFFCFCFD0), width: 1),
         ),
       ),
-      backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
-      elevation: MaterialStateProperty.all<double>(0),
-      overlayColor: MaterialStateProperty.resolveWith<Color?>(
-        (Set<MaterialState> states) {
-          if (states.contains(MaterialState.pressed)) {
+      backgroundColor: WidgetStateProperty.all<Color>(Colors.transparent),
+      elevation: WidgetStateProperty.all<double>(0),
+      overlayColor: WidgetStateProperty.resolveWith<Color?>(
+        (Set<WidgetState> states) {
+          if (states.contains(WidgetState.pressed)) {
             return Colors.grey.withOpacity(0.1);
           }
           return null;

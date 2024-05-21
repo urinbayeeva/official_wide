@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
     return _currentPageIndex == 0
         ? const SizedBox.shrink()
         : SizedBox(
-            width: 80,
+            width: 90,
             child: NavigationRail(
                 backgroundColor: Colors.white,
                 selectedIndex: _currentPageIndex,
@@ -88,16 +88,11 @@ class _HomePageState extends State<HomePage> {
                     label: const Text(""),
                   ),
                   NavigationRailDestination(
-                    icon: Padding(
-                      padding: const EdgeInsets.only(left: 20, top: 28),
-                      child: SvgPicture.asset(
-                        AppImages.personIcon,
-                        width: 22,
-                        height: 22,
-                      ),
-                    ),
-                    label: const Text(""),
-                  ),
+                      icon: Padding(
+                          padding: const EdgeInsets.only(left: 20, top: 28),
+                          child: SvgPicture.asset(AppImages.personIcon,
+                              width: 22, height: 22)),
+                      label: const Text("")),
                   NavigationRailDestination(
                       icon: Padding(
                           padding: const EdgeInsets.only(left: 20, top: 28),
@@ -149,6 +144,7 @@ class _HomePageState extends State<HomePage> {
 
     if (pickedFile != null) {
       Navigator.push(
+        // ignore: use_build_context_synchronously
         context,
         MaterialPageRoute(
           builder: (context) => const CameraScreen(),

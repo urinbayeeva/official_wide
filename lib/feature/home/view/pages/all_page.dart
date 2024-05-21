@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:responsive/logic.dart';
 import 'package:vibration/vibration.dart';
 import 'package:wide/core/screens/all.dart';
 
@@ -103,6 +104,11 @@ class _AllPageState extends State<AllPage> {
   int likeCount = 0;
   bool isFollowed = false;
 
+  double getResponsiveWidth(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    return screenWidth <= 600 ? screenWidth : 800;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -134,7 +140,7 @@ class _AllPageState extends State<AllPage> {
                         }
                       }))),
           SizedBox(
-            width: 80,
+            width: 90,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -190,7 +196,96 @@ class _AllPageState extends State<AllPage> {
                   text: "102",
                   widht: 22,
                   height: 22,
-                  onPressed: () => showHorizontalBottomSheet(context),
+                  onPressed: () {
+                    showModalBottomSheet(
+                      isScrollControlled: true,
+                      isDismissible: true,
+                      constraints: BoxConstraints(
+                        maxWidth: getResponsiveWidth(context),
+                      ),
+                      backgroundColor: Colors.white,
+                      context: context,
+                      builder: (BuildContext context) {
+                        return SizedBox(
+                          height: MediaQuery.of(context).size.height / 1.2,
+                          child: Column(children: [
+                            Container(
+                              width: getResponsiveWidth(context),
+                              decoration: const BoxDecoration(
+                                  border: Border(
+                                      bottom: BorderSide(
+                                          width: 1, color: AppColors.cefefef))),
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 20, bottom: 24, left: 16, right: 16),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    SvgPicture.asset(
+                                      "assets/icons/home/bottomsheet_cancel.svg",
+                                      width: 22,
+                                      height: 22,
+                                    ),
+                                    const SearchTextField(),
+                                    Row(
+                                      // mainAxisAlignment:
+                                      //     MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Image.asset(
+                                          "assets/images/home/circle_plus.png",
+                                          width: 40,
+                                          height: 40,
+                                        ),
+                                        const SizedBox(width: 20),
+                                        Image.asset(
+                                          "assets/images/home/circle_share.png",
+                                          width: 40,
+                                          height: 40,
+                                        ),
+                                        const SizedBox(width: 20),
+                                        Image.asset(
+                                          "assets/images/home/cirle_link.png",
+                                          width: 40,
+                                          height: 40,
+                                        ),
+                                      ],
+                                    ),
+                                    Container(
+                                      decoration: const BoxDecoration(
+                                          border: Border(
+                                              left: BorderSide(
+                                        width: 1,
+                                        color: AppColors.cefefef,
+                                      ))),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 16.0),
+                                        child: SvgPicture.asset(
+                                          "assets/icons/home/top.svg",
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 32, vertical: 24),
+                                child: ListTile(
+                                    leading: Image.asset(personImages[0]),
+                                    title: const Text("User",
+                                        style: TextStyle(
+                                            color: AppColors.c1c1c1c,
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w600))))
+                          ]),
+                        );
+                      },
+                    );
+                  },
                 ),
                 const RotatedWidget(
                   imagePath: "assets/icons/tab_bar/saved.svg",
@@ -428,7 +523,7 @@ class _AllPageState extends State<AllPage> {
               // Play/Pause Button
               Positioned.fill(
                 child: AnimatedSwitcher(
-                  duration: Duration(milliseconds: 200),
+                  duration: const Duration(milliseconds: 200),
                   child: !_videoControllers[index].value.isPlaying
                       ? GestureDetector(
                           onTap: () {

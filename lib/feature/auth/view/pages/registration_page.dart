@@ -27,7 +27,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
-
     return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
@@ -128,7 +127,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             userName: nameController.text.trim(),
                             phone: phoneNumberController.text.trim(),
                           );
-
                           debugPrint(
                               "${regisModel.userName}, ${regisModel.phone}");
                           bool userExists =

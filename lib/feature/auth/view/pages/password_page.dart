@@ -1,6 +1,7 @@
 import 'package:wide/core/screens/all.dart';
 import 'package:wide/data/entity/auth_model/registration_model.dart';
 import 'package:wide/feature/auth/view/pages/input_code.dart';
+import 'package:wide/feature/auth/view/pages/input_textfield.dart';
 
 class InputPassword extends StatefulWidget {
   const InputPassword({super.key});
@@ -16,6 +17,7 @@ class _InputPasswordState extends State<InputPassword> {
     late RegistrationModel model;
 
     TextEditingController passwordController = TextEditingController();
+    TextEditingController confirmPasswordController = TextEditingController();
     bool passwordVisible = true;
     final passwordKey = GlobalKey<FormState>();
 
@@ -88,55 +90,60 @@ class _InputPasswordState extends State<InputPassword> {
               ),
             ),
             const Spacer(),
-            TextFormField(
-              inputFormatters: <TextInputFormatter>[
-                FilteringTextInputFormatter.allow(RegExp("[0-9@a-zA-Z.]")),
-              ],
-              textAlignVertical: TextAlignVertical.center,
-              obscureText: !passwordVisible,
+            // TextFormField(
+            //   inputFormatters: <TextInputFormatter>[
+            //     FilteringTextInputFormatter.allow(RegExp("[0-9@a-zA-Z.]")),
+            //   ],
+            //   textAlignVertical: TextAlignVertical.center,
+            //   obscureText: !passwordVisible,
+            //   controller: passwordController,
+            //   decoration: InputDecoration(
+            //     suffixIcon: passwordVisible
+            //         ? IconButton(
+            //             icon: SvgPicture.asset(
+            //               passwordVisible
+            //                   ? "assets/icons/auth/eye_icon.svg"
+            //                   : "assets/icons/auth/off_eye_icon.svg",
+            //               width: 22,
+            //               height: 22,
+            //             ),
+            //             onPressed: () {
+            //               setState(() {
+            //                 passwordVisible = !passwordVisible;
+            //               });
+            //             },
+            //           )
+            //         : null,
+            //     border: InputBorder.none,
+            //     hintText: "Parolingiz",
+            //     hintStyle: const TextStyle(
+            //       color: Color(0xFFB7B7B7),
+            //       fontSize: 14,
+            //     ),
+            //     errorBorder: const OutlineInputBorder(
+            //       borderRadius: BorderRadius.all(Radius.circular(30)),
+            //       borderSide: BorderSide(
+            //         color: Colors.red,
+            //         width: 1.5,
+            //       ),
+            //     ),
+            //     focusedBorder: OutlineInputBorder(
+            //       borderSide:
+            //           const BorderSide(color: AppColors.c1a73e8, width: 1.0),
+            //       borderRadius: BorderRadius.circular(8.0),
+            //     ),
+            //     enabledBorder: OutlineInputBorder(
+            //       borderSide:
+            //           const BorderSide(color: AppColors.cfcfdf0, width: 1.0),
+            //       borderRadius: BorderRadius.circular(8.0),
+            //     ),
+            //     contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+            //   ),
+            // ),
+            InputTextField(
+              name: "Parolingizni tasdiqlang",
               controller: passwordController,
-              decoration: InputDecoration(
-                suffixIcon: passwordVisible
-                    ? IconButton(
-                        icon: SvgPicture.asset(
-                          passwordVisible
-                              ? "assets/icons/auth/eye_icon.svg"
-                              : "assets/icons/auth/off_eye_icon.svg",
-                          width: 22,
-                          height: 22,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            passwordVisible = !passwordVisible;
-                          });
-                        },
-                      )
-                    : null,
-                border: InputBorder.none,
-                hintText: "Parolingiz",
-                hintStyle: const TextStyle(
-                  color: Color(0xFFB7B7B7),
-                  fontSize: 14,
-                ),
-                errorBorder: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(30)),
-                  borderSide: BorderSide(
-                    color: Colors.red,
-                    width: 1.5,
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: AppColors.c1a73e8, width: 1.0),
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: AppColors.cfcfdf0, width: 1.0),
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-              ),
+              showPasswordToggle: true,
             ),
             const SizedBox(height: 18),
             TextFormField(
@@ -145,29 +152,30 @@ class _InputPasswordState extends State<InputPassword> {
               ],
               textAlignVertical: TextAlignVertical.center,
               obscureText: !passwordVisible,
-              controller: passwordController,
+              controller: confirmPasswordController,
               decoration: InputDecoration(
-                suffixIcon: passwordVisible
-                    ? IconButton(
-                        icon: SvgPicture.asset(
-                            passwordVisible
-                                ? "assets/icons/auth/eye_icon.svg"
-                                : "assets/icons/auth/off_eye_icon.svg",
-                            width: 22,
-                            height: 22),
-                        onPressed: () {
-                          setState(() {
-                            passwordVisible = !passwordVisible;
-                          });
-                        })
-                    : null,
+                suffixIcon: IconButton(
+                  icon: SvgPicture.asset(
+                    passwordVisible
+                        ? "assets/icons/auth/eye_icon.svg"
+                        : "assets/icons/auth/off_eye_icon.svg",
+                    width: 22,
+                    height: 22,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      passwordVisible = !passwordVisible;
+                    });
+                  },
+                ),
                 border: InputBorder.none,
                 hintText: "Parolingizni tasdiqlang",
                 hintStyle:
                     const TextStyle(color: Color(0xFFB7B7B7), fontSize: 14),
                 errorBorder: const OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(30)),
-                    borderSide: BorderSide(color: Colors.red, width: 1.5)),
+                  borderRadius: BorderRadius.all(Radius.circular(30)),
+                  borderSide: BorderSide(color: Colors.red, width: 1.5),
+                ),
                 focusedBorder: OutlineInputBorder(
                   borderSide:
                       const BorderSide(color: AppColors.c1a73e8, width: 1.0),
