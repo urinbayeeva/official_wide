@@ -2,7 +2,7 @@ import 'dart:convert';
 
 class RegistrationModel {
   final String userName;
-  final String password;
+  String password;
   final String phone;
 
   RegistrationModel({

@@ -16,9 +16,22 @@ class RegistrationModel {
 
   RegistrationModel({
     required this.userName,
-    this.password,
     required this.phone,
+    required this.password,
   });
+
+  // Add this copyWith method
+  RegistrationModel copyWith({
+    String? userName,
+    String? phone,
+    String? password,
+  }) {
+    return RegistrationModel(
+      userName: userName ?? this.userName,
+      phone: phone ?? this.phone,
+      password: password ?? this.password,
+    );
+  }
 
   factory RegistrationModel.fromJson(Map<String, dynamic> json) =>
       RegistrationModel(

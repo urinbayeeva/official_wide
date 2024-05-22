@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart';
 
 class NetworkService {
-  static const String baseUrl = "http://95.47.238.47:5000/api-client/Login";
+  static const String baseUrl = "http://95.47.238.47:5000/api-client";
   static const String apiPostData = "/Login/Registration";
   static const String checkUser = "/Login/CheckUser";
 
@@ -58,9 +58,10 @@ class NetworkService {
       Uri url = Uri.parse("$baseUrl$checkUser?userName=$username");
       Response response = await get(url, headers: headers);
       if (response.statusCode == 200) {
+        print("response.body ${response.body}");
         List<dynamic> users = jsonDecode(response.body)['result'];
+        // Check if the username exists in the list of users
         bool userExists = users.contains(username);
-        print("Response status code: ${response.statusCode}\n\n\n\n\n");
         return userExists;
       } else {
         return false;
